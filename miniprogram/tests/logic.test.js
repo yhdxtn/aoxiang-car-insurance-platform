@@ -67,6 +67,30 @@ test('微信聊天取消选择不触发上传，明确仅选图片', async () =>
   assert.equal(received.type, 'image')
   assert.equal(received.count, 4)
 })
+test('开发者工具电脑导入使用本地文件选择器并标记WEB来源', async () => {
+  resetWx()
+  let received
+  wx.requirePrivacyAuthorize = (options) => options.success()
+  wx.getSystemInfoSync = () => ({ platform: 'devtools' })
+  wx.chooseMessageFile = (options) => {
+    received = options
+    options.success({
+      tempFiles: [
+        { path: '/tmp/vehicle.png', name: 'vehicle.png', size: 100, type: 'image' },
+      ],
+    })
+  }
+  wx.showActionSheet = (options) => {
+    assert.deepEqual(options.itemList, ['从电脑选择 / 拖入图片'])
+    options.success({ tapIndex: 0 })
+  }
+  const selected = await media.selectSource()
+  assert.equal(selected, 'WEB')
+  const files = await media.chooseImages(selected)
+  assert.equal(received.type, 'image')
+  assert.equal(received.count, 4)
+  assert.equal(files[0].path, '/tmp/vehicle.png')
+})
 test('拒绝隐私授权后不打开相册', async () => {
   resetWx()
   let called = false

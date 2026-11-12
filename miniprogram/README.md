@@ -22,6 +22,7 @@
 
 - 手机相册/拍照：`wx.chooseMedia`，`mediaType:['image']`。
 - 微信聊天：`wx.chooseMessageFile`，`type:'image'`。由用户主动在微信提供的选择器中选择群聊或聊天里的图片，不会自动读取群聊。
+- 电脑开发者工具：选择“从电脑选择 / 拖入图片”，通过 `wx.chooseMessageFile` 选择本地图片；文件选择器打开后可从资源管理器拖入图片。上传记录标记为 `WEB`，不会伪装成聊天图片。
 - 每次最多四张，单张不超过 10MB；JPG、PNG、WEBP。HEIC 等不支持格式应先转换。
 - `wx.requirePrivacyAuthorize` 配合 `onNeedPrivacyAuthorization` 与原生 `agreePrivacyAuthorization` 按钮，用户可拒绝或查看官方隐私指引。
 - 需在微信后台《用户隐私保护指引》准确声明资料图片、联系人及相关使用目的。上线主体、客服联系方式、保存周期等由运营方配置及发布。

@@ -42,9 +42,15 @@ async function chooseImages(source) {
       if (cancelled(error)) resolve([])
       else reject(new Error('无法选择图片，请检查微信权限后重试'))
     }
-    if (source === 'CHAT') {
+    if (source === 'CHAT' || source === 'WEB') {
       if (!wx.chooseMessageFile) {
-        reject(new Error('当前微信版本暂不支持聊天选图，请更新微信或使用相册'))
+        reject(
+          new Error(
+            source === 'WEB'
+              ? '当前开发环境不支持电脑选图，请使用微信开发者工具或手机上传'
+              : '当前微信版本暂不支持聊天选图，请更新微信或使用相册',
+          ),
+        )
         return
       }
       wx.chooseMessageFile({
@@ -95,11 +101,19 @@ async function chooseImages(source) {
   })
 }
 function selectSource() {
+  let platform = ''
+  try {
+    platform = wx.getSystemInfoSync ? wx.getSystemInfoSync().platform : ''
+  } catch (_) {}
+  const desktop = ['devtools', 'windows', 'mac', 'macos'].includes(platform)
+  const itemList = desktop
+    ? ['从电脑选择 / 拖入图片']
+    : ['从手机相册选择', '从微信群 / 聊天选择', '拍摄照片']
   return new Promise((resolve) =>
     wx.showActionSheet({
-      itemList: ['从手机相册选择', '从微信群 / 聊天选择', '拍摄照片'],
+      itemList,
       success: (result) =>
-        resolve(['ALBUM', 'CHAT', 'CAMERA'][result.tapIndex]),
+        resolve(desktop ? 'WEB' : ['ALBUM', 'CHAT', 'CAMERA'][result.tapIndex]),
       fail: () => resolve(null),
     }),
   )
