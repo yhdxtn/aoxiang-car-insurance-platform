@@ -384,14 +384,13 @@
 </view>
 <view class="composer-wrap" wx:if="{{session}}">
   <view class="composer">
-    <button
-      class="plus-button"
+    <view
+      class="composer-action plus-button {{uploading || !canSend ? 'composer-disabled' : ''}}"
       bindtap="addAttachment"
-      disabled="{{uploading || !canSend}}"
       aria-label="上传资料"
     >
-      ＋
-    </button>
+      <text>＋</text>
+    </view>
     <input
       class="chat-input"
       value="{{messageText}}"
@@ -403,16 +402,15 @@
       disabled="{{!canSend}}"
       adjust-position
     />
-    <button
-      class="send-button"
+    <view
+      class="composer-action send-button {{!messageText || !canSend ? 'composer-disabled' : ''}}"
       bindtap="sendMessage"
-      disabled="{{!messageText || !canSend}}"
       aria-label="发送消息"
     >
-      ➤
-    </button>
+      <text>➤</text>
+    </view>
   </view>
-  <view class="safe-bottom"></view>
+  <view class="composer-safe-bottom"></view>
 </view>
 <view wx:if="{{showForm}}" class="modal-mask" bindtap="closeForm">
   <view class="form-sheet" catchtap="noop">
