@@ -1,0 +1,210 @@
+.home-page {
+  padding-top: 24rpx;
+}
+.brand-line {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  font-size: 26rpx;
+  font-weight: 650;
+}
+.brand-mark {
+  width: 42rpx;
+  height: 42rpx;
+  line-height: 42rpx;
+  text-align: center;
+  border-radius: 13rpx;
+  background: #ff7b2f;
+  color: #fff;
+  font-size: 25rpx;
+}
+.brand-label {
+  margin-left: auto;
+  font-size: 21rpx;
+  letter-spacing: 2rpx;
+  color: #a39486;
+  font-weight: 400;
+}
+.hero {
+  position: relative;
+  min-height: 340rpx;
+  margin-top: 38rpx;
+  overflow: hidden;
+}
+.hero-copy {
+  position: relative;
+  z-index: 2;
+}
+.hero-title {
+  font-size: 56rpx;
+  font-weight: 750;
+  line-height: 1.35;
+  letter-spacing: -1rpx;
+  margin: 17rpx 0;
+}
+.hero-description {
+  font-size: 25rpx;
+  color: #8c8279;
+  line-height: 1.9;
+}
+.hero-hint {
+  display: inline-flex;
+  gap: 30rpx;
+  background: #fff;
+  border: 2rpx solid #ffe2c7;
+  color: #c97439;
+  padding: 12rpx 22rpx;
+  border-radius: 40rpx;
+  margin-top: 22rpx;
+  font-size: 22rpx;
+}
+.hero-avatar {
+  position: absolute;
+  right: 24rpx;
+  top: 93rpx;
+  z-index: 1;
+  transform: rotate(8deg) scale(1.18);
+}
+.hero-orbit {
+  position: absolute;
+  right: -55rpx;
+  top: 60rpx;
+  width: 285rpx;
+  height: 285rpx;
+  border: 2rpx dashed #efc3a2;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    #ffe7c8 0%,
+    #ffe6cc50 48%,
+    transparent 65%
+  );
+}
+.car-entry {
+  background: linear-gradient(115deg, #ff893a, #ff732a);
+  display: flex;
+  align-items: center;
+  gap: 25rpx;
+  color: #fff;
+  padding: 36rpx 28rpx;
+  border-radius: 28rpx;
+  min-height: 168rpx;
+  box-shadow: 0 12rpx 28rpx #ff8c3b26;
+}
+.entry-title {
+  font-size: 31rpx;
+  font-weight: 650;
+}
+.entry-subtitle {
+  font-size: 23rpx;
+  color: #a18b76;
+  margin-top: 5rpx;
+}
+.car-entry .entry-subtitle {
+  color: #fff0df;
+}
+.entry-arrow {
+  font-size: 36rpx;
+  border: 2rpx solid #ffffff70;
+  width: 52rpx;
+  height: 52rpx;
+  text-align: center;
+  line-height: 46rpx;
+  border-radius: 50%;
+}
+.vehicle-icon {
+  position: relative;
+  width: 106rpx;
+  height: 78rpx;
+  flex-shrink: 0;
+}
+.car-roof {
+  position: absolute;
+  left: 22rpx;
+  top: 10rpx;
+  width: 62rpx;
+  height: 38rpx;
+  background: #fff3df;
+  border-radius: 25rpx 23rpx 0 0;
+}
+.car-body {
+  position: absolute;
+  left: 5rpx;
+  top: 35rpx;
+  width: 97rpx;
+  height: 30rpx;
+  border-radius: 14rpx;
+  background: #fff;
+}
+.wheel {
+  position: absolute;
+  top: 56rpx;
+  width: 20rpx;
+  height: 20rpx;
+  border: 5rpx solid #a75a32;
+  background: #ffd1a2;
+  border-radius: 50%;
+}
+.wheel.one {
+  left: 20rpx;
+}
+.wheel.two {
+  right: 14rpx;
+}
+.entry-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+  margin-top: 20rpx;
+}
+.small-entry {
+  background: #fff;
+  border-radius: 25rpx;
+  padding: 26rpx;
+  position: relative;
+  border: 2rpx solid #fff0de;
+}
+.entry-mini-icon {
+  font-size: 38rpx;
+  color: #d79757;
+  width: 58rpx;
+  height: 58rpx;
+  border-radius: 16rpx;
+  background: #fff1de;
+  text-align: center;
+  line-height: 58rpx;
+  margin-bottom: 14rpx;
+}
+.teal {
+  color: #609c8c;
+  background: #eaf6ef;
+}
+.entry-corner {
+  position: absolute;
+  right: 23rpx;
+  top: 28rpx;
+  color: #bdac99;
+  font-size: 28rpx;
+}
+.service-promise {
+  display: flex;
+  justify-content: space-around;
+  font-size: 20rpx;
+  color: #ad9d8c;
+  padding: 25rpx 0;
+}
+.login-hint {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx;
+}
+.recent-session .between + .between {
+  margin-top: 18rpx;
+}
+.home-footer {
+  font-size: 21rpx;
+  color: #baa998;
+  text-align: center;
+  margin-top: 38rpx;
+}

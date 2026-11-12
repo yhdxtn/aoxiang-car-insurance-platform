@@ -1,0 +1,68 @@
+<view class="login-page">
+  <view class="login-logo"><assistant-avatar size="large" /></view>
+  <view class="login-title">欢迎来到车险助手</view>
+  <view class="muted login-subtitle">安心办理，从这里开始</view>
+  <view class="card login-card">
+    <view class="heading">微信快捷登录</view>
+    <view class="muted small">
+      登录后可上传车辆资料、获取报价和联系人工客服。
+    </view>
+    <view wx:if="{{error}}" class="error-box">{{error}}</view>
+    <button
+      class="btn-primary login-button"
+      loading="{{submitting}}"
+      disabled="{{submitting || loading}}"
+      bindtap="login"
+    >
+      微信登录
+    </button>
+    <view class="agreement">
+      <view class="check {{agreed ? 'checked' : ''}}" bindtap="toggleAgree">
+        {{agreed ? '✓' : ''}}
+      </view>
+      <view class="small muted">
+        我已阅读并同意
+        <text class="text-link" bindtap="showPrivacy">
+          《隐私与资料使用说明》
+        </text>
+      </view>
+    </view>
+    <view wx:if="{{allowDemoLogin}}" class="demo-login">
+      <view class="demo-label" bindtap="toggleAccount">
+        {{showAccount ? '收起' : '打开'}}演示账号登录
+      </view>
+      <view wx:if="{{showAccount}}">
+        <view class="notice">仅用于演示环境；正式环境不显示此入口。</view>
+        <view class="field">
+          <view class="field-label">演示账号</view>
+          <input
+            class="field-input"
+            value="{{username}}"
+            data-field="username"
+            bindinput="input"
+          />
+        </view>
+        <view class="field">
+          <view class="field-label">密码</view>
+          <input
+            class="field-input"
+            password
+            value="{{password}}"
+            data-field="password"
+            bindinput="input"
+            placeholder="输入演示密码"
+          />
+        </view>
+        <button
+          class="btn-secondary"
+          bindtap="accountLogin"
+          loading="{{submitting}}"
+          disabled="{{submitting}}"
+        >
+          进入演示
+        </button>
+      </view>
+    </view>
+  </view>
+  <view class="login-footer">你的资料仅用于本次车险服务</view>
+</view>

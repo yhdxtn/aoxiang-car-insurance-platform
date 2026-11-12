@@ -1,0 +1,16 @@
+{
+  "name": "aoxiang-car-insurance-platform",
+  "version": "1.0.0",
+  "private": true,
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "setup:web": "npm --prefix apps/admin-web ci && npm --prefix apps/service-web ci",
+    "dev:admin": "npm --prefix apps/admin-web run dev",
+    "dev:service": "npm --prefix apps/service-web run dev",
+    "test:mini": "node miniprogram/tests/validate.js && node --test miniprogram/tests/logic.test.js",
+    "test:web": "npm --prefix apps/admin-web test && npm --prefix apps/service-web test",
+    "test:workspace": "node --test scripts/tests/workspace.test.mjs",
+    "test": "npm run test:mini && npm run test:web && npm run test:workspace",
+    "build:web": "npm --prefix apps/admin-web run build && npm --prefix apps/service-web run build"
+  }
+}

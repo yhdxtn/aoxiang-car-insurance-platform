@@ -1,0 +1,75 @@
+<view wx:if="{{mode === 'demo'}}" class="demo-banner">
+  演示订单 · 不代表真实投保或出单
+</view>
+<view class="page">
+  <view class="page-heading">
+    <view class="heading">我的订单</view>
+    <view class="muted small">每一次办理进度，都清晰可见</view>
+  </view>
+  <view wx:if="{{loggedIn}}">
+    <view class="search-box">
+      <text>⌕</text>
+      <input
+        value="{{search}}"
+        bindinput="searchInput"
+        bindconfirm="search"
+        confirm-type="search"
+        placeholder="搜索车牌 / 姓名 / 车架号 / 保单号"
+      />
+      <button class="search-button" bindtap="search">搜索</button>
+    </view>
+    <view class="filter-tabs">
+      <view
+        wx:for="{{tabs}}"
+        wx:key="value"
+        data-status="{{item.value}}"
+        bindtap="chooseStatus"
+        class="filter-tab {{status === item.value ? 'selected' : ''}}"
+      >
+        {{item.label}}
+      </view>
+    </view>
+    <view wx:if="{{error}}" class="error-box">{{error}}</view>
+    <view
+      wx:for="{{items}}"
+      wx:key="id"
+      class="card order-card"
+      data-id="{{item.id}}"
+      bindtap="open"
+    >
+      <view class="between">
+        <view class="order-plate">{{item.plateNo || '新车投保申请'}}</view>
+        <view class="status-pill">{{item.statusLabel}}</view>
+      </view>
+      <view class="order-subtitle">
+        <text class="tag">泰康</text>
+        <text>{{item.typeLabel}} · {{item.customerName || '投保申请'}}</text>
+        <text wx:if="{{item.demo}}" class="demo-tag">演示</text>
+      </view>
+      <view class="order-number">订单号：{{item.orderNo}}</view>
+      <view class="divider"></view>
+      <view class="between">
+        <view class="muted small">{{item.formattedTime}}</view>
+        <view class="order-amount">
+          {{item.premiumPending ? '' : '¥'}}{{item.formattedPremium}}
+          <text>→</text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{loading}}" class="loading">正在加载订单…</view>
+    <view wx:if="{{!loading && !items.length && !error}}" class="empty">
+      <view class="empty-illustration">▤</view>
+      <view class="empty-title">暂无相关订单</view>
+      <view class="small">完成报价并提交申请后，可在这里查看进度</view>
+      <button class="btn-secondary" bindtap="goHome">去首页报价</button>
+    </view>
+    <view wx:if="{{items.length && !hasMore}}" class="list-end">
+      已显示全部订单
+    </view>
+  </view>
+  <view wx:else class="empty">
+    <view class="empty-title">登录后查看投保申请</view>
+    <view class="small">普通用户仅查看本人订单</view>
+    <button class="btn-primary" bindtap="login">去登录</button>
+  </view>
+</view>

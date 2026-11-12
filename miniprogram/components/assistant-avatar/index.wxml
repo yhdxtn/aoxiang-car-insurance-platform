@@ -1,0 +1,19 @@
+<view
+  class="avatar {{size}} {{service ? 'service' : ''}}"
+  aria-role="img"
+  aria-label="{{service ? '人工客服' : '车险助手'}}"
+>
+  <view class="antenna"><view class="antenna-dot"></view></view>
+  <view class="ear left"></view>
+  <view class="ear right"></view>
+  <view class="head">
+    <view class="face">
+      <view class="eyes">
+        <view class="eye"></view>
+        <view class="eye"></view>
+      </view>
+      <view class="smile"></view>
+    </view>
+  </view>
+  <view class="body"></view>
+</view>

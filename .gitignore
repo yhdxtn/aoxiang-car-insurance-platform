@@ -1,0 +1,27 @@
+.env
+.env.*
+!.env.example
+**/node_modules/
+**/dist/
+**/target/
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/.qa-render/
+**/data/
+**/var/
+*.log
+*.sqlite3*
+*.db
+*.mv.db
+*.trace.db
+**/.maven-settings-local.xml
+.DS_Store
+
+
+# Local developer settings and source deliveries
+**/project.private.config.json
+/.tools/
+/.local/
+/*.zip
+/*.png

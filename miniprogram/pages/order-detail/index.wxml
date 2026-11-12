@@ -1,0 +1,83 @@
+<view wx:if="{{order.demo}}" class="demo-banner">
+  演示订单 · 不代表真实投保或出单
+</view>
+<view class="page">
+  <view wx:if="{{loading}}" class="loading">正在加载订单详情…</view>
+  <view wx:if="{{error}}" class="error-box">
+    {{error}}
+    <view class="text-link" bindtap="load">点击重试</view>
+  </view>
+  <block wx:if="{{order}}">
+    <view class="detail-hero">
+      <view class="status-icon">
+        {{order.status === 'COMPLETED' ? '✓' : '◷'}}
+      </view>
+      <view class="heading">{{order.statusLabel}}</view>
+      <view class="small muted">
+        {{order.status === 'COMPLETED' ? '工作人员已核实并录入保单信息' :
+        order.status === 'CANCELLED' ? '此申请已取消，历史资料仍可查看' :
+        '投保申请已记录，客服将跟进办理'}}
+      </view>
+    </view>
+    <view class="card">
+      <view class="between">
+        <view class="heading">{{order.plateNo || '新车投保申请'}}</view>
+        <view class="tag">泰康车险</view>
+      </view>
+      <view class="key-value">
+        <text class="key">订单号</text>
+        <text class="value" bindtap="copyNumber">
+          {{order.orderNo}}
+          <text class="text-link small">复制</text>
+        </text>
+      </view>
+      <view class="key-value">
+        <text class="key">车辆类型</text>
+        <text class="value">{{order.typeLabel}}</text>
+      </view>
+      <view class="key-value">
+        <text class="key">车主姓名</text>
+        <text class="value">{{order.customerName || '—'}}</text>
+      </view>
+      <view class="key-value">
+        <text class="key">联系电话</text>
+        <text class="value">{{order.phone || '—'}}</text>
+      </view>
+      <view class="key-value">
+        <text class="key">车架号</text>
+        <text class="value">{{order.vin || '—'}}</text>
+      </view>
+      <view class="key-value">
+        <text class="key">申请时间</text>
+        <text class="value">{{order.formattedTime}}</text>
+      </view>
+      <view class="key-value" wx:if="{{order.policyNo}}">
+        <text class="key">保单号</text>
+        <text class="value">{{order.policyNo}}</text>
+      </view>
+      <view class="between detail-total">
+        <text>方案合计</text>
+        <text class="money">
+          {{order.premiumPending ? '' : '¥'}}{{order.formattedPremium}}
+        </text>
+      </view>
+    </view>
+    <view class="card" wx:if="{{history.length}}">
+      <view class="heading timeline-heading">办理轨迹</view>
+      <view wx:for="{{history}}" wx:key="id" class="timeline-item">
+        <view class="timeline-dot"></view>
+        <view>
+          <view>{{item.statusLabel}}</view>
+          <view class="small muted">{{item.note}}</view>
+          <view class="timeline-time">{{item.timeLabel}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="notice">
+      订单中的报价金额以保险公司核保结果为准。申请状态与实际付款、出单状态分别核实。
+    </view>
+    <button class="btn-primary contact-button" bindtap="conversation">
+      联系人工客服 / 查看会话
+    </button>
+  </block>
+</view>

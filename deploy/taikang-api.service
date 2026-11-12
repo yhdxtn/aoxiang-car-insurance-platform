@@ -1,0 +1,22 @@
+[Unit]
+Description=Taikang mini-program Java API
+After=network-online.target mysql.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=taikang
+Group=taikang
+WorkingDirectory=/opt/taikang-mini/backend
+EnvironmentFile=/etc/taikang-mini.env
+Environment=TZ=UTC
+ExecStart=/usr/bin/java -Xms256m -Xmx1024m -jar /opt/taikang-mini/backend/target/mini-insurance-api-1.0.0.jar
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+

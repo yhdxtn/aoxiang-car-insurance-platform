@@ -1,0 +1,28 @@
+{
+  "sourceArchive": "泰康报价接口与登录逻辑.zip",
+  "sourceRoot": "services/taikang-executor/src/taikang_executor",
+  "files": {
+    "__init__.py": "1038ebe83d994410a31a60b6c4db5f429dc65cd9c82a45cbca949d0db25f6d71",
+    "accident_products.py": "d3385207fb09bc823496b70f9ccffd2ad1673ea87287fceb0de54d5fceebc607",
+    "business_preparation.py": "6f5e0a854434e4485403e2f2e2e50a178ebcd421f26c8783bd73e5f2fd915d3b",
+    "captcha.py": "78cb4c75126a0204b4e17914588a9a63171aa8a8a92bf9ed0381e3aa0ef10e73",
+    "client.py": "2879c59398d3001073c76ef4b63c3ce7982088e5e14cdd0794367be1ea5fd6ea",
+    "coverage_mapping.py": "c66f8661988e9c723d182433cf50b66529d79fb8ac9e0ef7a4155fa27b8690f9",
+    "http_diagnostic.py": "8b3b3dc2d95ae0e634d12452d101d55a9686119bfea22ad28615d69e341d13b9",
+    "identity_translation.py": "d7715c188c1e0bc4113c4937f34192546a00cba096a1bd6561da3ddbf35f7080",
+    "noncar_availability.py": "12522876f25b4458bd2971a62739643c8fed0ab38884103f7c94693ee0642813",
+    "ocr_recovery.py": "1e4c0468ad38e8ce0e7ce2368cf2a10d9f16d3871d42e726e7737b8c9189def0",
+    "ocr_review.py": "9fbd63bcddf04b47da6fb297dfeb4713a1425cfb3430be77a034a09100d57a37",
+    "ocr_transport.py": "6270afc370ca82d61c330a0d6522f60cb1898acff74b2031c485776ea00e8cc7",
+    "order_services.py": "8e74f2c2a17528fd8d37d3fec0baa241b695d62b9c5b340b9bf444688ad42e8c",
+    "post_proposal.py": "1fb1d45d47db49ae80bc5947f826287433d62a12ac4c323a9cc86d95288cc6d0",
+    "preparation_reuse.py": "e3d0736b4bd0341d1c5cf3e68cc197cf15b1d7687ba83baea439dfe2c848e15f",
+    "quote_paths.py": "9affc6518b39c5440f877428dc4ce110c3d89616463418d4aba7bcf102b72813",
+    "stage_results.py": "9978b35c776d7e733d5affd74b652aa607d09d7348fff74437b4e6cb4022f18e",
+    "staged_client.py": "16d083220b106e37de758fa5d5696d602e47c4a625b32255cd9d867ffa23381a",
+    "supplier_evidence.py": "d34d0d5e03f4d6ba7c32cfd992151cd349b3f72521cb287e2661297e82978a26",
+    "supplier_transfer.py": "12ee87d4271cc6663cb153be962766361b55c493ed894ea7923287a663fab7ca",
+    "text_preparation.py": "e50644494f0c12c9b73d99766f1d67a4bf7c3be481adf002c9e28f9a7beebec8",
+    "vehicle_lookup.py": "9c9be855295b30b331900fcf37eea0d6f272833fb3891c96f8207b5346d0eac6"
+  }
+}

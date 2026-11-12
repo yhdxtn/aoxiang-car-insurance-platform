@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "taikang-mini-gateway"
+version = "1.0.0"
+description = "Independent quote-only adapter reusing the supplied Taikang protocol"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+  "fastapi==0.115.12", "uvicorn==0.34.2", "requests==2.32.5",
+  "pycryptodome==3.23.0", "cryptography==45.0.3", "pillow==11.2.1", "httpx==0.28.1"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

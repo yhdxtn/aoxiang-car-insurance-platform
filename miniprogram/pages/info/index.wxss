@@ -1,0 +1,168 @@
+.info-title {
+  margin: 10rpx 0 28rpx;
+}
+.points-overview {
+  text-align: center;
+  padding: 30rpx 20rpx 45rpx;
+  background: #fff;
+  border-radius: 28rpx;
+  margin-bottom: 25rpx;
+}
+.big-number {
+  font-size: 75rpx;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #eb842f;
+}
+.point-row {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+.point-row .muted {
+  margin-top: 8rpx;
+}
+.point-delta {
+  font-size: 35rpx;
+  color: #a4a5a6;
+  font-weight: 650;
+}
+.point-delta.positive {
+  color: #e48c36;
+}
+.policy-toolbar {
+  margin-bottom: 20rpx;
+}
+.policy-title {
+  font-size: 29rpx;
+  font-weight: 650;
+}
+.policy-meta {
+  color: #b6997e;
+  font-size: 21rpx;
+  margin-top: 11rpx;
+}
+.policy-content {
+  font-size: 26rpx;
+  line-height: 1.9;
+  color: #687079;
+  white-space: pre-wrap;
+  margin: 21rpx 0;
+}
+.policy-period {
+  border-top: 2rpx solid #f3eee8;
+  padding-top: 17rpx;
+  color: #ab9b8c;
+  font-size: 21rpx;
+}
+.info-notice {
+  margin: 0 0 23rpx;
+}
+.org-row {
+  display: flex;
+  align-items: center;
+  gap: 15rpx;
+  padding-top: 17rpx;
+  padding-bottom: 17rpx;
+  border-bottom: 2rpx solid #f4efe7;
+}
+.org-row:last-child {
+  border-bottom: 0;
+}
+.org-node {
+  color: #d7a779;
+  font-size: 37rpx;
+}
+.finance-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+  background: linear-gradient(115deg, #f7a058, #f17b34);
+  color: #fff;
+  padding: 34rpx 25rpx;
+  border-radius: 27rpx;
+  margin-bottom: 24rpx;
+}
+.finance-summary .small {
+  color: #ffe9d6;
+}
+.summary-money {
+  font-size: 35rpx;
+  font-weight: 700;
+  margin-top: 8rpx;
+  word-break: break-all;
+}
+.finance-detail {
+  font-size: 25rpx;
+  margin-top: 20rpx;
+}
+.finance-detail > view {
+  display: flex;
+  justify-content: space-between;
+  padding: 7rpx 0;
+}
+.customer-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+.customer-toolbar input {
+  flex: 1;
+  background: #fff;
+}
+.customer-add {
+  margin: 22rpx 0;
+}
+.customer-notes {
+  color: #988c7e;
+  font-size: 24rpx;
+  margin-top: 15rpx;
+  border-top: 2rpx solid #f2ece4;
+  padding-top: 15rpx;
+  white-space: pre-wrap;
+}
+.session-card .between + .between {
+  margin-top: 18rpx;
+}
+.article {
+  font-size: 26rpx;
+  line-height: 1.9;
+  color: #7e837f;
+}
+.article-heading {
+  color: #3f484c;
+  font-size: 29rpx;
+  font-weight: 650;
+  margin: 22rpx 0 12rpx;
+}
+.article-heading:first-child {
+  margin-top: 0;
+}
+.article > view:not(.article-heading) {
+  margin-bottom: 18rpx;
+}
+.privacy-button {
+  margin-top: 26rpx;
+}
+.center {
+  text-align: center;
+}
+.form-mask {
+  position: fixed;
+  inset: 0;
+  background: #29251e55;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30rpx;
+  z-index: 50;
+}
+.customer-form {
+  width: 100%;
+  padding: 30rpx;
+  max-height: 92vh;
+  overflow: auto;
+}
+.customer-form .heading {
+  margin-bottom: 24rpx;
+}

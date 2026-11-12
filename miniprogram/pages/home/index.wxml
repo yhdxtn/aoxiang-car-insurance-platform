@@ -1,0 +1,96 @@
+<view wx:if="{{mode === 'demo'}}" class="demo-banner">
+  演示环境 · 报价与订单均为演示数据
+</view>
+<view class="page home-page">
+  <view class="brand-line">
+    <view class="brand-mark">保</view>
+    <text>泰康车险服务</text>
+    <text class="brand-label">便捷 · 安心</text>
+  </view>
+  <view class="hero">
+    <view class="hero-copy">
+      <view class="eyebrow">YOUR INSURANCE ASSISTANT</view>
+      <view class="hero-title">
+        <view>车险报价，</view>
+        <view>交给小助手。</view>
+      </view>
+      <view class="hero-description">
+        <view>上传资料 · 核对信息 · 获取方案</view>
+        <view>每一步，都有人陪你。</view>
+      </view>
+      <view class="hero-hint" bindtap="openGuide">
+        查看办理指南
+        <text>↗</text>
+      </view>
+    </view>
+    <view class="hero-avatar"><assistant-avatar size="large" /></view>
+    <view class="hero-orbit"></view>
+  </view>
+  <view class="section-title">你想为哪种车投保？</view>
+  <view class="car-entry" data-type="CAR" bindtap="start">
+    <view class="vehicle-icon car-icon">
+      <view class="car-roof"></view>
+      <view class="car-body"></view>
+      <view class="wheel one"></view>
+      <view class="wheel two"></view>
+    </view>
+    <view class="grow">
+      <view class="entry-title">家用车</view>
+      <view class="entry-subtitle">资料识别，轻松获取泰康方案</view>
+    </view>
+    <view class="entry-arrow">→</view>
+  </view>
+  <view class="entry-grid">
+    <view class="small-entry" data-type="TRUCK" bindtap="start">
+      <view class="entry-mini-icon">▣</view>
+      <view class="entry-title">货车</view>
+      <view class="entry-subtitle">按车辆资料核验可报范围</view>
+      <view class="entry-corner">↗</view>
+    </view>
+    <view class="small-entry" data-type="MOTORCYCLE" bindtap="start">
+      <view class="entry-mini-icon teal">◉</view>
+      <view class="entry-title">摩托车</view>
+      <view class="entry-subtitle">专属人工客服协助办理</view>
+      <view class="entry-corner">↗</view>
+    </view>
+  </view>
+  <view class="service-promise">
+    <text>✓ 仅泰康渠道</text>
+    <text>✓ 资料授权保护</text>
+    <text>✓ 人工服务</text>
+  </view>
+  <view wx:if="{{error}}" class="error-box">
+    {{error}}
+    <view class="text-link" bindtap="load">点击重新连接</view>
+  </view>
+  <view wx:if="{{loading}}" class="loading">正在连接服务…</view>
+  <view wx:if="{{!loggedIn && !loading}}" class="card login-hint">
+    <view>
+      <view class="entry-title">你的专属投保记录</view>
+      <view class="muted small">登录后，继续报价和查看订单</view>
+    </view>
+    <button class="btn-secondary btn-small" bindtap="login">登录</button>
+  </view>
+  <view wx:if="{{sessions.length}}">
+    <view class="section-title">继续上次办理</view>
+    <view
+      wx:for="{{sessions}}"
+      wx:key="id"
+      class="card recent-session"
+      data-id="{{item.id}}"
+      bindtap="resume"
+    >
+      <view class="between">
+        <text class="entry-title">
+          {{item.vehicle.plateNo || item.typeLabel + '报价'}}
+        </text>
+        <text class="status-pill">{{item.statusLabel}}</text>
+      </view>
+      <view class="between muted small">
+        <text>{{item.formattedTime}}</text>
+        <text>继续办理 →</text>
+      </view>
+    </view>
+  </view>
+  <view class="home-footer">报价以保险公司最终核保结果为准</view>
+</view>

@@ -1,0 +1,968 @@
+{
+  "project": "taikang-mini-suite",
+  "version": "1.0.0",
+  "created": "2026-11-12",
+  "scope": "Source files only; excludes this manifest, installed dependencies, generated builds and private runtime data.",
+  "files": [
+    {
+      "path": ".dockerignore",
+      "bytes": 153,
+      "sha256": "d54a595fd0c16fd71498e032cb9a9ec0cd1fca23bb6fa33ddd53cacab5d63181"
+    },
+    {
+      "path": ".env.example",
+      "bytes": 877,
+      "sha256": "58262d8cbd7ff3e3214dc3d77e0de7b5878ce2d18ab841ff0ae6042f2d6fdee0"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 220,
+      "sha256": "a97828e626a51fe03ffc5bde39262b6b97c2a9f602bf3646163be525ffe08b8c"
+    },
+    {
+      "path": "README.md",
+      "bytes": 8336,
+      "sha256": "0c1cf5183cf821312fa9d2085fbe9ca1d84bc26f4503b143a398580789601805"
+    },
+    {
+      "path": "apps/admin-web/.env.example",
+      "bytes": 177,
+      "sha256": "9b6cdba3351d419c2c8a01ad580638cc9bd48054ef9e59c06a6db7730bf40be6"
+    },
+    {
+      "path": "apps/admin-web/.gitignore",
+      "bytes": 57,
+      "sha256": "ad215a2bcb69851cbe894ad470b66264ec63e7a6652181d951858ddf8d564c8a"
+    },
+    {
+      "path": "apps/admin-web/.prettierignore",
+      "bytes": 36,
+      "sha256": "b0bca94a80846df59808ebc09892f4b1f3aa03df79dea6081038cca5bfd47564"
+    },
+    {
+      "path": "apps/admin-web/.prettierrc.json",
+      "bytes": 81,
+      "sha256": "3107df1b0aaed5833d2b3d754e20f14c36948b50b0a9990b0645185f29076072"
+    },
+    {
+      "path": "apps/admin-web/README.md",
+      "bytes": 3044,
+      "sha256": "a532220f6d4942cb97fd51e5a28941969073a07ab61e258c92948a70af79f151"
+    },
+    {
+      "path": "apps/admin-web/index.html",
+      "bytes": 366,
+      "sha256": "25e98e9bde2738efbb7472b3f3ab83cf3eddc74fe33804469d80c7be45bcb224"
+    },
+    {
+      "path": "apps/admin-web/package-lock.json",
+      "bytes": 43984,
+      "sha256": "3d9c4917de7462009871621db3d6243cb18ff7b46c0536f515ac47ce44054fd9"
+    },
+    {
+      "path": "apps/admin-web/package.json",
+      "bytes": 590,
+      "sha256": "60cb3185b190517856d3b489cf72aa7506b769c2e5d2eaf5aff7745221e49c52"
+    },
+    {
+      "path": "apps/admin-web/src/App.vue",
+      "bytes": 6669,
+      "sha256": "3a65cc1a81bd364dcef31de396d1c1defa3d774f66f8403155e315acf9756620"
+    },
+    {
+      "path": "apps/admin-web/src/api.js",
+      "bytes": 3048,
+      "sha256": "f95a482744a696a75dd1b039d5ce58bfa721d5c9f77f6ba4ff719a4496185ac0"
+    },
+    {
+      "path": "apps/admin-web/src/components/EmptyState.vue",
+      "bytes": 442,
+      "sha256": "b54c825bb388f661a4f4842493a71925900e0c8fcc5a15b90c785f6ebe3ffef1"
+    },
+    {
+      "path": "apps/admin-web/src/components/Icon.vue",
+      "bytes": 2213,
+      "sha256": "501d63594955ca5a80f43a80518fb6003fe005e02da2a5f7242580b37e108f7e"
+    },
+    {
+      "path": "apps/admin-web/src/components/Modal.vue",
+      "bytes": 866,
+      "sha256": "0414833891b3f0f25749fef2239d65cb62c1879e984ae6d677cb8840b18c3f7c"
+    },
+    {
+      "path": "apps/admin-web/src/components/Pagination.vue",
+      "bytes": 588,
+      "sha256": "78004176b6684ae29beb5670b5bc39f08db62dc2abeb0da43bbd8cd71bb52321"
+    },
+    {
+      "path": "apps/admin-web/src/components/StatusBadge.vue",
+      "bytes": 222,
+      "sha256": "9345429a912b0fcae99bf9d8f2a6151e3b7da07f639e052e11ada0a80e9d1ca8"
+    },
+    {
+      "path": "apps/admin-web/src/domain.js",
+      "bytes": 4801,
+      "sha256": "44ff146869c073f7d3fa5dfa5185d4f4cf0f98a0be37c294c2f677f979bf861b"
+    },
+    {
+      "path": "apps/admin-web/src/main.js",
+      "bytes": 115,
+      "sha256": "b4811e428b08bce40f2e683ecf550e2dec0e7e7f906dc06bf24b12e5c9290db9"
+    },
+    {
+      "path": "apps/admin-web/src/styles.css",
+      "bytes": 32174,
+      "sha256": "54a187701a5c10a83b9586ec2a62eef161d54592e2df0dcab8381e00207dfbfc"
+    },
+    {
+      "path": "apps/admin-web/src/views/Customers.vue",
+      "bytes": 4842,
+      "sha256": "6d933f0eb8e0234b6370b1f73d88a1a2edf282943b72eb1f558ad0995cb7f4c6"
+    },
+    {
+      "path": "apps/admin-web/src/views/Dashboard.vue",
+      "bytes": 5864,
+      "sha256": "5d3a09f9143852e2425fc8b24f6c5e2854f8e8facb20fe4cfd51ba1175240c7a"
+    },
+    {
+      "path": "apps/admin-web/src/views/FinancePoints.vue",
+      "bytes": 7960,
+      "sha256": "95ccbc9aadf09ea56982081389dee2cf34319d3020cc2e4dddefbe7998c13ff1"
+    },
+    {
+      "path": "apps/admin-web/src/views/Login.vue",
+      "bytes": 3679,
+      "sha256": "47883b2aa9c716d08bb4415ab73af7dbd3bda9c32bf1d2a05ab4c69f9e9c6658"
+    },
+    {
+      "path": "apps/admin-web/src/views/Orders.vue",
+      "bytes": 9092,
+      "sha256": "67c699e6b17a373958ec37a815e27576099c960f5b72464d479a976a2b86761b"
+    },
+    {
+      "path": "apps/admin-web/src/views/OrganizationUsers.vue",
+      "bytes": 12056,
+      "sha256": "c7d4d93d40bcf66a600d9d700d3c8bc9f0b051c29d86f1f6a84c25434cc86556"
+    },
+    {
+      "path": "apps/admin-web/src/views/Policies.vue",
+      "bytes": 8764,
+      "sha256": "ad948462edb4b3b9c598b33e67f1b1b80c9dc09e21719133021bc5439da6849f"
+    },
+    {
+      "path": "apps/admin-web/src/views/SettingsAudit.vue",
+      "bytes": 8709,
+      "sha256": "d5a2b53912e382b265b948d662525fd1553aa9a1b0729f480a9a700478d20c34"
+    },
+    {
+      "path": "apps/admin-web/tests/api.test.mjs",
+      "bytes": 3535,
+      "sha256": "81d68fd2589cde58b951226280ab8c3d00fb59f825f30b70f82396438e6f2b90"
+    },
+    {
+      "path": "apps/admin-web/tests/domain.test.mjs",
+      "bytes": 2677,
+      "sha256": "2b5732a0845b202901b7825bd9a4e307eac13920fdc038d50fab017ecdd00cb0"
+    },
+    {
+      "path": "apps/admin-web/tests/ssr-entry.js",
+      "bytes": 515,
+      "sha256": "7c3ea416f92dc686b87e683e5ce4e0f11790826782ca8df26c9845a4a5ba479e"
+    },
+    {
+      "path": "apps/admin-web/vite.config.js",
+      "bytes": 362,
+      "sha256": "f599ed05a0aa27a89940655dc432dc9e375a97e2d2377e30cead692275c33c11"
+    },
+    {
+      "path": "apps/mini-program/README.md",
+      "bytes": 4949,
+      "sha256": "f249352a934f6094b0331be9458c179ae1416f0b9c0b9810057d6e84593a4d9a"
+    },
+    {
+      "path": "apps/mini-program/app.js",
+      "bytes": 1126,
+      "sha256": "1a915ebe0f7e5b7a862c1f0fb52f32f1f0f5c98a4a8a4f34c05535e7effee5a1"
+    },
+    {
+      "path": "apps/mini-program/app.json",
+      "bytes": 1016,
+      "sha256": "84be0d822eda43a017361bce35448af097d4c6c67cdf350ce5b1eb16c591646e"
+    },
+    {
+      "path": "apps/mini-program/app.wxss",
+      "bytes": 3553,
+      "sha256": "f0a507c75645c3989a2989ef3a5fbedb9c25fd456acb188f72c3a579ce044566"
+    },
+    {
+      "path": "apps/mini-program/components/assistant-avatar/index.js",
+      "bytes": 127,
+      "sha256": "c5c324de43718dea0ca9879b93ea02c70103245836612d2eb48e8763a124e16f"
+    },
+    {
+      "path": "apps/mini-program/components/assistant-avatar/index.json",
+      "bytes": 22,
+      "sha256": "e7b657f5a4b032a68e9e084639b3a5564ce552896d269c3f8c4463bf7a7fa3b5"
+    },
+    {
+      "path": "apps/mini-program/components/assistant-avatar/index.wxml",
+      "bytes": 521,
+      "sha256": "fb3d2bf68d843b88737de714a8c8565556c850f96c453a9992bd843215fb9fe0"
+    },
+    {
+      "path": "apps/mini-program/components/assistant-avatar/index.wxss",
+      "bytes": 2643,
+      "sha256": "5ad162a85d658d684e188be497cc5846e9c9ed296c316db11ae4d880cef15593"
+    },
+    {
+      "path": "apps/mini-program/config.js",
+      "bytes": 423,
+      "sha256": "b3c78ad5020d90e3c1b8338bb6ff091ba20bdcdb4c3c9101c85fe9a8e13ef415"
+    },
+    {
+      "path": "apps/mini-program/pages/assistant/index.js",
+      "bytes": 22958,
+      "sha256": "ff8231681a4f59e7d302f26cebe98b71a7700a40e0b78b402d68765915a94c6e"
+    },
+    {
+      "path": "apps/mini-program/pages/assistant/index.json",
+      "bytes": 72,
+      "sha256": "6433ffe9d7bc08fce924598ba2126915f456ab1df9f0aa8ef85a18d07b69d97a"
+    },
+    {
+      "path": "apps/mini-program/pages/assistant/index.wxml",
+      "bytes": 20885,
+      "sha256": "afa30e5e2f5a12fc1b63f0a5270b81852e2f900bd1c54197621c25079ba54f1b"
+    },
+    {
+      "path": "apps/mini-program/pages/assistant/index.wxss",
+      "bytes": 9073,
+      "sha256": "c31208e9d95a33adc7280cbb0406c3c34f870605d554bd41fcf5a5f63871bc8e"
+    },
+    {
+      "path": "apps/mini-program/pages/home/index.js",
+      "bytes": 1568,
+      "sha256": "c4cbba830e2aa63518a5601fabeff11b8b25fb42291f9a48744e064fca66f5a1"
+    },
+    {
+      "path": "apps/mini-program/pages/home/index.json",
+      "bytes": 51,
+      "sha256": "de19e4b20e955b23b452b250a4cfe9963987208d083561e68493ab3f869ddce7"
+    },
+    {
+      "path": "apps/mini-program/pages/home/index.wxml",
+      "bytes": 3531,
+      "sha256": "93a771ca159794e8432b7e3fa8664de32ff51137aa826c997f00ef143308bff4"
+    },
+    {
+      "path": "apps/mini-program/pages/home/index.wxss",
+      "bytes": 3582,
+      "sha256": "496f20d8bc01a7858dac59cf6abd6e9441ba939b0e5818bc7d106b3bbfa92848"
+    },
+    {
+      "path": "apps/mini-program/pages/info/index.js",
+      "bytes": 7179,
+      "sha256": "be8336e4932a1560a9c5758f654448043af70397ca6519f147de6cf6c4f3b08c"
+    },
+    {
+      "path": "apps/mini-program/pages/info/index.json",
+      "bytes": 45,
+      "sha256": "5ee0dc707413225e58db5fb5a9d003b2919d86d748338f0695246d3efb4a3a94"
+    },
+    {
+      "path": "apps/mini-program/pages/info/index.wxml",
+      "bytes": 10601,
+      "sha256": "47bc84124c0a6be5669c2c75735a68bb084bfa6d151501830d2fff018089d907"
+    },
+    {
+      "path": "apps/mini-program/pages/info/index.wxss",
+      "bytes": 2812,
+      "sha256": "45a9ab1069118e3805d8315e7a475b891e4c30d9a8b13b7eeda881409dd71a6b"
+    },
+    {
+      "path": "apps/mini-program/pages/login/index.js",
+      "bytes": 2656,
+      "sha256": "10a0d48a456a62d30953fc032e2271ee270686241cbfaf15d386774b6e467992"
+    },
+    {
+      "path": "apps/mini-program/pages/login/index.json",
+      "bytes": 45,
+      "sha256": "30459b6cf4ea2720139b5a3fe030cd19a6c7a51704b729b0cc2746f5ab6c387d"
+    },
+    {
+      "path": "apps/mini-program/pages/login/index.wxml",
+      "bytes": 2263,
+      "sha256": "41eee79c43709ae905014df5479f7071a2abcd6763992dc659a53bd0cbf9adf0"
+    },
+    {
+      "path": "apps/mini-program/pages/login/index.wxss",
+      "bytes": 1071,
+      "sha256": "b318cd7f03b8e734ed8000a84eee742f603feff3ed5b2f5f713b8d67be03fb6f"
+    },
+    {
+      "path": "apps/mini-program/pages/me/index.js",
+      "bytes": 3130,
+      "sha256": "a61add3e108e63632ee04465476eb8a18883c439537e4d47a4507ec3202ed5c2"
+    },
+    {
+      "path": "apps/mini-program/pages/me/index.json",
+      "bytes": 39,
+      "sha256": "a465281f644c1694ebbe3d38aade68e78a16b5a63e7a3e11c28cda4b7103b543"
+    },
+    {
+      "path": "apps/mini-program/pages/me/index.wxml",
+      "bytes": 4451,
+      "sha256": "d19bfaab5f8b2c775a8ed74a49328c61342ef60f039468e9bd14805c9a7eb638"
+    },
+    {
+      "path": "apps/mini-program/pages/me/index.wxss",
+      "bytes": 1783,
+      "sha256": "9841aa1562638b6c34a4f90b90ba34ea264d5f50aa7f2ab19903b95922c714b9"
+    },
+    {
+      "path": "apps/mini-program/pages/order-detail/index.js",
+      "bytes": 1378,
+      "sha256": "c19720caf4f2150dc6955a5fea09bbf63a36d64f20bffad979a01227530ca73d"
+    },
+    {
+      "path": "apps/mini-program/pages/order-detail/index.json",
+      "bytes": 45,
+      "sha256": "61b181759aec2162c4f1250646746994c1b0ddae50bcad714ff1ccd8ea0b3f84"
+    },
+    {
+      "path": "apps/mini-program/pages/order-detail/index.wxml",
+      "bytes": 3175,
+      "sha256": "d044c4a07384a5b81a017e3cce736b87d03eeff7922d2c2915675828b75906eb"
+    },
+    {
+      "path": "apps/mini-program/pages/order-detail/index.wxss",
+      "bytes": 942,
+      "sha256": "b0c35d73bcc0bf41aca7447cd04bc34cc2de7c4817d57d80a8b8f52edd1456e0"
+    },
+    {
+      "path": "apps/mini-program/pages/orders/index.js",
+      "bytes": 2084,
+      "sha256": "448659f5ee2224844b0c0c281ab966494d46be18b03a7d29f39372ceabdf497d"
+    },
+    {
+      "path": "apps/mini-program/pages/orders/index.json",
+      "bytes": 76,
+      "sha256": "e8e9c71c93941a4319d9c4ec708bd95e1a4654bcaf78bcabe707713758d9a6a9"
+    },
+    {
+      "path": "apps/mini-program/pages/orders/index.wxml",
+      "bytes": 2755,
+      "sha256": "0911478a6d624a3bc053d93412e717d1d2863f93df5eee656c3b057ec039e144"
+    },
+    {
+      "path": "apps/mini-program/pages/orders/index.wxss",
+      "bytes": 1602,
+      "sha256": "2fee12dca5b1ef4fa5feacb60ceedb45ed5163c87177e234adf26c261ba10872"
+    },
+    {
+      "path": "apps/mini-program/project.config.json",
+      "bytes": 492,
+      "sha256": "aa7f058767c0f296a24e3d67099a1a0bc4db34e4c508350b8b30bf284c5c151c"
+    },
+    {
+      "path": "apps/mini-program/sitemap.json",
+      "bytes": 129,
+      "sha256": "0e0e73c3c43cf332d6739611427939ef98de6ee8ab62be34c6158c8313c5d744"
+    },
+    {
+      "path": "apps/mini-program/tests/logic.test.js",
+      "bytes": 7457,
+      "sha256": "f407b59d28739bb33538ceb36539a0274ea1475d5f15f871894395c3c8ae2ecf"
+    },
+    {
+      "path": "apps/mini-program/tests/render-preview.js",
+      "bytes": 8747,
+      "sha256": "9cd1b2f90dcd88c898196f3f976b01b24cd2828977ece39bd2cd222410877b44"
+    },
+    {
+      "path": "apps/mini-program/tests/validate.js",
+      "bytes": 2960,
+      "sha256": "fe0fc275cfa13774dbecad98b370485156d61ddff867529459b4056a7fb234f5"
+    },
+    {
+      "path": "apps/mini-program/utils/api.js",
+      "bytes": 4167,
+      "sha256": "e882505937c67a785d0b697b66516806414a3b64512781845d1ccac6eee6b752"
+    },
+    {
+      "path": "apps/mini-program/utils/auth.js",
+      "bytes": 779,
+      "sha256": "a7910ae39f3c31ca800281703ccf86ba6897453510472113870662fc58c79e8f"
+    },
+    {
+      "path": "apps/mini-program/utils/format.js",
+      "bytes": 3115,
+      "sha256": "a5ab1c6d61bbd705f2e7e87e6553744b25f8cffe371281b93e9edbec29c92ed5"
+    },
+    {
+      "path": "apps/mini-program/utils/media.js",
+      "bytes": 3413,
+      "sha256": "bc4453f979a92e0500c84746ef7fcdd11e34748b6a910a26ac77332d524c04c3"
+    },
+    {
+      "path": "apps/service-web/.env.example",
+      "bytes": 59,
+      "sha256": "57cebcfdb67186b3aee02c2782f54992fb7d65c96bbadf2fa235e7534ed83eef"
+    },
+    {
+      "path": "apps/service-web/.gitignore",
+      "bytes": 57,
+      "sha256": "ad215a2bcb69851cbe894ad470b66264ec63e7a6652181d951858ddf8d564c8a"
+    },
+    {
+      "path": "apps/service-web/.prettierignore",
+      "bytes": 36,
+      "sha256": "b0bca94a80846df59808ebc09892f4b1f3aa03df79dea6081038cca5bfd47564"
+    },
+    {
+      "path": "apps/service-web/.prettierrc.json",
+      "bytes": 81,
+      "sha256": "3107df1b0aaed5833d2b3d754e20f14c36948b50b0a9990b0645185f29076072"
+    },
+    {
+      "path": "apps/service-web/README.md",
+      "bytes": 3506,
+      "sha256": "193782198567b7942e4c4486371ddcd913398595472192aa3989c3db5e95a31e"
+    },
+    {
+      "path": "apps/service-web/index.html",
+      "bytes": 366,
+      "sha256": "4b9abf9a8b1e1050aa7830d449b2921f05aaa706d1df1c597fcd3746955a15dd"
+    },
+    {
+      "path": "apps/service-web/package-lock.json",
+      "bytes": 43988,
+      "sha256": "93d9c55f515642871d592971772e5d8432209b73144529c59b14595a7f30c305"
+    },
+    {
+      "path": "apps/service-web/package.json",
+      "bytes": 592,
+      "sha256": "6ae4fde35f8b3f1a3fb9670442aeed4753b52a93d9109475e9777799c69426a4"
+    },
+    {
+      "path": "apps/service-web/src/App.vue",
+      "bytes": 46035,
+      "sha256": "0dc6cc51db8dcd9615b6579fcee55f93a6f137a2e7522a6572e3e819bba4a541"
+    },
+    {
+      "path": "apps/service-web/src/api.js",
+      "bytes": 3050,
+      "sha256": "3184f3d57ad50668ef36ba5a3ce94b4ece56aedbd55c87a0fb2daee642269337"
+    },
+    {
+      "path": "apps/service-web/src/base.css",
+      "bytes": 32174,
+      "sha256": "54a187701a5c10a83b9586ec2a62eef161d54592e2df0dcab8381e00207dfbfc"
+    },
+    {
+      "path": "apps/service-web/src/components/EmptyState.vue",
+      "bytes": 442,
+      "sha256": "b54c825bb388f661a4f4842493a71925900e0c8fcc5a15b90c785f6ebe3ffef1"
+    },
+    {
+      "path": "apps/service-web/src/components/Icon.vue",
+      "bytes": 2213,
+      "sha256": "501d63594955ca5a80f43a80518fb6003fe005e02da2a5f7242580b37e108f7e"
+    },
+    {
+      "path": "apps/service-web/src/components/Login.vue",
+      "bytes": 3281,
+      "sha256": "14c434b1e23d043ea7c017598993cb80608eb2ee1b02da64dd4435e5b9915c7e"
+    },
+    {
+      "path": "apps/service-web/src/components/Modal.vue",
+      "bytes": 866,
+      "sha256": "0414833891b3f0f25749fef2239d65cb62c1879e984ae6d677cb8840b18c3f7c"
+    },
+    {
+      "path": "apps/service-web/src/components/PrivateImage.vue",
+      "bytes": 1699,
+      "sha256": "abcba440d06783713028dcac13155c41f58f2b75f52755909f02d1652bd72095"
+    },
+    {
+      "path": "apps/service-web/src/components/StatusBadge.vue",
+      "bytes": 222,
+      "sha256": "9345429a912b0fcae99bf9d8f2a6151e3b7da07f639e052e11ada0a80e9d1ca8"
+    },
+    {
+      "path": "apps/service-web/src/domain.js",
+      "bytes": 5293,
+      "sha256": "9706e9f1da130b7472bb86b5e7538b71f3e442b24434d97dadfde937b02b0e29"
+    },
+    {
+      "path": "apps/service-web/src/main.js",
+      "bytes": 136,
+      "sha256": "55513964441cebc58e9a812e2eed0144d168c03d27707c6e8875816541f8702e"
+    },
+    {
+      "path": "apps/service-web/src/polling.js",
+      "bytes": 1414,
+      "sha256": "2c2c02e59ae55a8272f3002442ab4fc56454269d716352f722d1bd58c456eeaf"
+    },
+    {
+      "path": "apps/service-web/src/styles.css",
+      "bytes": 24673,
+      "sha256": "a5ee2b0507956c86b7623f15f0716a4a8eb0fc28bda69daab9ec9b3b67a32e85"
+    },
+    {
+      "path": "apps/service-web/tests/api.test.mjs",
+      "bytes": 3535,
+      "sha256": "81d68fd2589cde58b951226280ab8c3d00fb59f825f30b70f82396438e6f2b90"
+    },
+    {
+      "path": "apps/service-web/tests/manual-application.test.mjs",
+      "bytes": 2278,
+      "sha256": "f2ad005969d7e3742f548ec5d4a88b0aa910948dbf9836f6fead29fabb1b810d"
+    },
+    {
+      "path": "apps/service-web/tests/polling.test.mjs",
+      "bytes": 2148,
+      "sha256": "9965cdabd19d66597d257122e62887d8ccdeef4113ca327a00275a72cd6fbd66"
+    },
+    {
+      "path": "apps/service-web/tests/ssr-entry.js",
+      "bytes": 274,
+      "sha256": "d69c2a2cc51d8d1061293e8ad53b8e4e4adfce53bb59b9d895d66148d892746d"
+    },
+    {
+      "path": "apps/service-web/vite.config.js",
+      "bytes": 362,
+      "sha256": "62fd34cfbbe586a8d7939aa2a53880f35fad20eb4b14152bb679e1129aef50b5"
+    },
+    {
+      "path": "backend/.dockerignore",
+      "bytes": 71,
+      "sha256": "16f09a2622b395ee43d7c44edb8f39e74d134a349867eefc88969d6214347d2c"
+    },
+    {
+      "path": "backend/.env.example",
+      "bytes": 615,
+      "sha256": "389a06f3ba5e05db4f708622cfc712b13286ed76d41b27a7e90b603dae0692ec"
+    },
+    {
+      "path": "backend/.gitignore",
+      "bytes": 51,
+      "sha256": "9b991d5e30bef41fd29413d02797a0ed429961dbbd4706c102034090ab5ef2e5"
+    },
+    {
+      "path": "backend/Dockerfile",
+      "bytes": 496,
+      "sha256": "77c553b7d4b8ef4f3a5d7f5f6a48f206f12820c97e720eca821b8c1a260712dd"
+    },
+    {
+      "path": "backend/README.md",
+      "bytes": 7495,
+      "sha256": "8994c8b6fd2700c5a1be8294eddb5aeb30374a4828a9ba4edd8d5ef261528e64"
+    },
+    {
+      "path": "backend/pom.xml",
+      "bytes": 1936,
+      "sha256": "9ee8dd528262324f4252dd6b3efe4c68cdd729e943897392233e2c7982d4e728"
+    },
+    {
+      "path": "backend/src/main/java/cn/taikang/mini/Access.java",
+      "bytes": 2312,
+      "sha256": "1adcee0506dc5ba2f95afa3dc5ad66ab468af10431761db609ba8c252ac7c25c"
+    },
+    {
+      "path": "backend/src/main/java/cn/taikang/mini/Actor.java",
+      "bytes": 578,
+      "sha256": "7c1eb141aac5de40931bf7a4f40f3d94b6b7302c1a1ed314d428087a3b21a5b8"
+    },
+    {
+      "path": "backend/src/main/java/cn/taikang/mini/ApiController.java",
+      "bytes": 9835,
+      "sha256": "d97419645ca7974603d8ff979e62e9ef49b060b7b30e615658c0ad196340074c"
+    },
+    {
+      "path": "backend/src/main/java/cn/taikang/mini/ApiException.java",
+      "bytes": 783,
+      "sha256": "f5006be1f25afe51983758012a06fca3dd43470dff03048253897881c4273ad1"
+    },
+    {
+      "path": "backend/src/main/java/cn/taikang/mini/AppConfig.java",
+      "bytes": 711,
+      "sha256": "7c06ed486c651de4856f2597a0b0be4a037f0007288f2c8305bd20c0bb202fb3"
+    },
+    {
+      "path": "backend/src/main/java/cn/taikang/mini/Application.java",
+      "bytes": 428,
+      "sha256": "25576fc4ce8b0ab71d021d925d0ab718e7e58a08c8cf7cd92e0e27ff93fbf46b"
+    },
+    {
+      "path": "backend/src/main/java/cn/taikang/mini/AuthService.java",
+      "bytes": 9721,
+      "sha256": "35b3070874d889681910cc770332f1b4c6359a85325667c40dedc7e87277bb4e"
+    },
+    {
+      "path": "backend/src/main/java/cn/taikang/mini/Bootstrap.java",
+      "bytes": 3647,
+      "sha256": "5ac53313a0688e96d8ebfad8cbe797e21eb616e5707a7bd6198263501d55986b"
+    },
+    {
+      "path": "backend/src/main/java/cn/taikang/mini/Crypto.java",
+      "bytes": 2767,
+      "sha256": "8e3dd564f2d3e53d5abc5708b26f374e673dd9092d52e8453e423262416cfea5"
+    },
+    {
+      "path": "backend/src/main/java/cn/taikang/mini/Errors.java",
+      "bytes": 1932,
+      "sha256": "ee0fd3049fe340a5725d188ce45b264abcf38b2fd836ade16a94173005f6c7ff"
+    },
+    {
+      "path": "backend/src/main/java/cn/taikang/mini/Gateway.java",
+      "bytes": 3280,
+      "sha256": "2347ab975d3d36cf2a158d246939e4523896a2e35e4bf36456547aea622d641a"
+    },
+    {
+      "path": "backend/src/main/java/cn/taikang/mini/Jsons.java",
+      "bytes": 3282,
+      "sha256": "9fe0c9a2cd95ca4b1bd6534a8196f3927e5e3938b8ee8ee17b58125c0004501b"
+    },
+    {
+      "path": "backend/src/main/java/cn/taikang/mini/Management.java",
+      "bytes": 26790,
+      "sha256": "56c6b09aaeb303083e93e4402e6fb8c27ccbc0f58e3a893f079dc684f410b326"
+    },
+    {
+      "path": "backend/src/main/java/cn/taikang/mini/Orders.java",
+      "bytes": 15558,
+      "sha256": "69da0f8e0e8e635b4114dcef6468d44608cc013d430e8e71c4f0428d27f622b6"
+    },
+    {
+      "path": "backend/src/main/java/cn/taikang/mini/Quotes.java",
+      "bytes": 13600,
+      "sha256": "83f35775bcd10e4fa5971f0cf4005f25c09d3fefd2155647f8affce3973315ce"
+    },
+    {
+      "path": "backend/src/main/java/cn/taikang/mini/Sessions.java",
+      "bytes": 23498,
+      "sha256": "2d75305c682d55eae45eb1592d0ed1536cbeda59621b66311088edbe389155d1"
+    },
+    {
+      "path": "backend/src/main/java/cn/taikang/mini/Store.java",
+      "bytes": 2135,
+      "sha256": "faf8bdcddcdfd34a10bead328ba7c693743be14208bf4f9c6a173f94963e9db3"
+    },
+    {
+      "path": "backend/src/main/java/cn/taikang/mini/WebConfiguration.java",
+      "bytes": 2521,
+      "sha256": "144334e649dc00b74a30a646e300d94c968566db0d8f1e67e80b2cea91fa029a"
+    },
+    {
+      "path": "backend/src/main/resources/application-demo.yml",
+      "bytes": 267,
+      "sha256": "ac847e56635e3f1d30e1b89ee3e99b3c3189092153986b9a6e1744ba3af090d4"
+    },
+    {
+      "path": "backend/src/main/resources/application.yml",
+      "bytes": 1272,
+      "sha256": "9ca529f7b6279e72b7ec8b5e3e997b2c91ccc201bd1c859a6468727351b7723f"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V1__initial_schema.sql",
+      "bytes": 7154,
+      "sha256": "46a2c9df1f3dfff125fd755a5e7e616befec88840b4507c3760ba4672c6389a6"
+    },
+    {
+      "path": "backend/src/test/java/cn/taikang/mini/PlatformIntegrationTest.java",
+      "bytes": 34204,
+      "sha256": "a19d572dc2c7bf3c55fd40f48cef53558fe6cbc03acf2dff6ba1f8034409b9f1"
+    },
+    {
+      "path": "backend/src/test/resources/application-test.yml",
+      "bytes": 257,
+      "sha256": "da9f53afcd6126fd5b775e31371e4d693e109965ef6c77bf699f7cb0effb9a8f"
+    },
+    {
+      "path": "backend/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker",
+      "bytes": 20,
+      "sha256": "8eca853a5a457f17e0479b71dfbe95f2a13aff9eeff250261ecdc8ca9b847a6a"
+    },
+    {
+      "path": "deploy/compose.yaml",
+      "bytes": 1968,
+      "sha256": "ad5223660174a5e71ced20f9518fc507fc65c7e1af44a3a26d63bf2d0e36d2cc"
+    },
+    {
+      "path": "deploy/nginx-container.conf",
+      "bytes": 1517,
+      "sha256": "b9c4788697ef37bc8191cfb042adbe48e084b3cabb173c2d5dee87b27698972d"
+    },
+    {
+      "path": "deploy/taikang-api.service",
+      "bytes": 498,
+      "sha256": "1e683f2e97e9955938f379855f601269f609390c261249269ffdb12f8392f10a"
+    },
+    {
+      "path": "deploy/taikang-gateway.service",
+      "bytes": 630,
+      "sha256": "7a398524731d2c242bf5559c5c95280ead4cfd48d08515fab22b55be442c3d7f"
+    },
+    {
+      "path": "deploy/web.Dockerfile",
+      "bytes": 571,
+      "sha256": "aa9413b5803f1611acb7be9f6d99c6a5139dfdd3eae4bc155660b714ca500ae5"
+    },
+    {
+      "path": "docs/API-CONTRACT.md",
+      "bytes": 8123,
+      "sha256": "1ea7ffc619a1b5362186080d45ded85c8f262de656ca117626b77a109df957d6"
+    },
+    {
+      "path": "docs/DEPLOYMENT.md",
+      "bytes": 9513,
+      "sha256": "076b0214fb982f4d17fb8d3749ffcfb1c7eed28db1819e50d2b75433f7ced6a5"
+    },
+    {
+      "path": "docs/REQUIREMENTS-MAPPING.md",
+      "bytes": 4866,
+      "sha256": "0507b7c96029935d240e8464b182b212046283b8ff49221e2acbc77a9f8de8d1"
+    },
+    {
+      "path": "docs/SOURCE-PACKAGES.md",
+      "bytes": 1357,
+      "sha256": "6eeb5058d18318a76f7d07249eea127951c9334534fb9dc8db8f33102d40e1ef"
+    },
+    {
+      "path": "docs/USER-REQUIREMENTS.md",
+      "bytes": 13542,
+      "sha256": "dc75168b37ed48e455b258260a582263ffa1ea20fc6385ce861883935095099f"
+    },
+    {
+      "path": "docs/VERIFICATION.md",
+      "bytes": 6280,
+      "sha256": "b62530f52c0d6e06d0e9561810b8b4b42e3eb888021f7e01cfa15f6f619f53c9"
+    },
+    {
+      "path": "docs/verification-summary.json",
+      "bytes": 1256,
+      "sha256": "60369481dd2a6f1784dad4ff57eed0107ff06e855993a9bd405a0c4006572ad9"
+    },
+    {
+      "path": "scripts/generate-env.py",
+      "bytes": 1860,
+      "sha256": "08ef6723142519f14bd8621f01ce037ea188ffb4a8a9797fe9410d66fc74bf3e"
+    },
+    {
+      "path": "scripts/run-demo.ps1",
+      "bytes": 554,
+      "sha256": "2f9395df48c437f556ae38167d1a1e439927c6bb216b5bfd40d707c8a4fc11f9"
+    },
+    {
+      "path": "scripts/run-demo.sh",
+      "bytes": 381,
+      "sha256": "ba6239182da62105c1247de559b8088b79cc47bc4833f03148e55b0605ffdd81"
+    },
+    {
+      "path": "scripts/verify-mysql-schema.py",
+      "bytes": 3142,
+      "sha256": "8819577b8daa67b282bf490947842c56350a2f957b3e120e3847ec69ecc90713"
+    },
+    {
+      "path": "services/taikang-gateway/.dockerignore",
+      "bytes": 72,
+      "sha256": "3bb25fb0517f7a12b2048a9d03092022d3e3e65877f77795bd3881556cacc9ad"
+    },
+    {
+      "path": "services/taikang-gateway/.env.example",
+      "bytes": 548,
+      "sha256": "18a00716822b6a2e425ca11c8f3670cdf7ec243f254d245a05254ebc4f338d06"
+    },
+    {
+      "path": "services/taikang-gateway/Dockerfile",
+      "bytes": 439,
+      "sha256": "5bba6c6dce490a962a208dd2435550c8454bd8eb85ad59f5ad1b6a749629549f"
+    },
+    {
+      "path": "services/taikang-gateway/README.md",
+      "bytes": 5293,
+      "sha256": "b1db7a90257064bce26e180759a9fdb3aec0290297307cc92762f128d0cdb6d7"
+    },
+    {
+      "path": "services/taikang-gateway/pyproject.toml",
+      "bytes": 546,
+      "sha256": "68d94061078f68df3a1ff00bf945f22640bc1f52064e8cc4cef03a8a1ba3e6d4"
+    },
+    {
+      "path": "services/taikang-gateway/requirements.lock",
+      "bytes": 469,
+      "sha256": "d15a99c8c64905c06ef368bc3e59fb0bbeb600a83ee03983edf215aae360fca1"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/__init__.py",
+      "bytes": 81,
+      "sha256": "1038ebe83d994410a31a60b6c4db5f429dc65cd9c82a45cbca949d0db25f6d71"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/accident_products.py",
+      "bytes": 1775,
+      "sha256": "d3385207fb09bc823496b70f9ccffd2ad1673ea87287fceb0de54d5fceebc607"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/business_preparation.py",
+      "bytes": 12367,
+      "sha256": "6f5e0a854434e4485403e2f2e2e50a178ebcd421f26c8783bd73e5f2fd915d3b"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/captcha.py",
+      "bytes": 504,
+      "sha256": "78cb4c75126a0204b4e17914588a9a63171aa8a8a92bf9ed0381e3aa0ef10e73"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/client.py",
+      "bytes": 44179,
+      "sha256": "2879c59398d3001073c76ef4b63c3ce7982088e5e14cdd0794367be1ea5fd6ea"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/coverage_mapping.py",
+      "bytes": 11739,
+      "sha256": "c66f8661988e9c723d182433cf50b66529d79fb8ac9e0ef7a4155fa27b8690f9"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/http_diagnostic.py",
+      "bytes": 2182,
+      "sha256": "8b3b3dc2d95ae0e634d12452d101d55a9686119bfea22ad28615d69e341d13b9"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/identity_translation.py",
+      "bytes": 3188,
+      "sha256": "d7715c188c1e0bc4113c4937f34192546a00cba096a1bd6561da3ddbf35f7080"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/noncar_availability.py",
+      "bytes": 1254,
+      "sha256": "12522876f25b4458bd2971a62739643c8fed0ab38884103f7c94693ee0642813"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/ocr_recovery.py",
+      "bytes": 6383,
+      "sha256": "1e4c0468ad38e8ce0e7ce2368cf2a10d9f16d3871d42e726e7737b8c9189def0"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/ocr_review.py",
+      "bytes": 5685,
+      "sha256": "9fbd63bcddf04b47da6fb297dfeb4713a1425cfb3430be77a034a09100d57a37"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/ocr_transport.py",
+      "bytes": 3545,
+      "sha256": "6270afc370ca82d61c330a0d6522f60cb1898acff74b2031c485776ea00e8cc7"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/order_services.py",
+      "bytes": 10682,
+      "sha256": "8e74f2c2a17528fd8d37d3fec0baa241b695d62b9c5b340b9bf444688ad42e8c"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/post_proposal.py",
+      "bytes": 22352,
+      "sha256": "1fb1d45d47db49ae80bc5947f826287433d62a12ac4c323a9cc86d95288cc6d0"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/preparation_reuse.py",
+      "bytes": 4273,
+      "sha256": "e3d0736b4bd0341d1c5cf3e68cc197cf15b1d7687ba83baea439dfe2c848e15f"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/quote_paths.py",
+      "bytes": 727,
+      "sha256": "9affc6518b39c5440f877428dc4ce110c3d89616463418d4aba7bcf102b72813"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/stage_results.py",
+      "bytes": 12761,
+      "sha256": "9978b35c776d7e733d5affd74b652aa607d09d7348fff74437b4e6cb4022f18e"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/staged_client.py",
+      "bytes": 82448,
+      "sha256": "16d083220b106e37de758fa5d5696d602e47c4a625b32255cd9d867ffa23381a"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/supplier_evidence.py",
+      "bytes": 1530,
+      "sha256": "d34d0d5e03f4d6ba7c32cfd992151cd349b3f72521cb287e2661297e82978a26"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/supplier_transfer.py",
+      "bytes": 11374,
+      "sha256": "12ee87d4271cc6663cb153be962766361b55c493ed894ea7923287a663fab7ca"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/text_preparation.py",
+      "bytes": 18567,
+      "sha256": "e50644494f0c12c9b73d99766f1d67a4bf7c3be481adf002c9e28f9a7beebec8"
+    },
+    {
+      "path": "services/taikang-gateway/src/taikang_executor/vehicle_lookup.py",
+      "bytes": 3652,
+      "sha256": "9c9be855295b30b331900fcf37eea0d6f272833fb3891c96f8207b5346d0eac6"
+    },
+    {
+      "path": "services/taikang-gateway/src/tk_gateway/__init__.py",
+      "bytes": 84,
+      "sha256": "dbaa72b6b4c00b43bb8a2089cd29d73749bf39bf1049cd5376cb3c74dc6769db"
+    },
+    {
+      "path": "services/taikang-gateway/src/tk_gateway/app.py",
+      "bytes": 4548,
+      "sha256": "fecb04824b44a9a7b78b231be97d7b525706b28da55333939a15df2498ce0517"
+    },
+    {
+      "path": "services/taikang-gateway/src/tk_gateway/carrier.py",
+      "bytes": 11992,
+      "sha256": "06551a50e95564c14875a68bbc85dc4805bf8c8128f1c2008b065302c7105909"
+    },
+    {
+      "path": "services/taikang-gateway/src/tk_gateway/config.py",
+      "bytes": 2775,
+      "sha256": "68a2c591939131e92a11955ebe15c1078c3331c4ff60beed32993a4b0598a346"
+    },
+    {
+      "path": "services/taikang-gateway/src/tk_gateway/ledger.py",
+      "bytes": 4841,
+      "sha256": "0bab6b4eaf87d3a67f521b0a065954bfffe036a1fea8e490619d27717c0a28bc"
+    },
+    {
+      "path": "services/taikang-gateway/src/tk_gateway/models.py",
+      "bytes": 2309,
+      "sha256": "ea79b9d82d3a484ef4d58d95a76cba79bdb2d0939dde3fe46cf8404b8f851410"
+    },
+    {
+      "path": "services/taikang-gateway/src/tk_gateway/ocr.py",
+      "bytes": 5348,
+      "sha256": "d34df20812bccfc5259afc1f41addafde50632835355ab5b869540aa9637d2ff"
+    },
+    {
+      "path": "services/taikang-gateway/tests/test_gateway.py",
+      "bytes": 11371,
+      "sha256": "a7556a6b40c09e355a19ac28b400c8ad2f43c50e52ed1d86faa62ac8b900ce2e"
+    },
+    {
+      "path": "services/taikang-gateway/tests/vendor/test_business_settings.py",
+      "bytes": 2110,
+      "sha256": "e2055eb7459d022081a9b54cacb401a8f39f434fa3ec8255ab33f9c7702af637"
+    },
+    {
+      "path": "services/taikang-gateway/tests/vendor/test_coverage_mapping.py",
+      "bytes": 5936,
+      "sha256": "437b2b3c4baf0a3ac10b07fb00ea93806e8a27dfbc6d72a238c685ee0accfa91"
+    },
+    {
+      "path": "services/taikang-gateway/tests/vendor/test_password_only_login.py",
+      "bytes": 3044,
+      "sha256": "6d018bb3263260b3b313793b52ccb0f012c329dd5ee19e187c05edf16de27aab"
+    },
+    {
+      "path": "services/taikang-gateway/vendor-provenance.json",
+      "bytes": 2192,
+      "sha256": "93fd76691f245e15870d9df7066deff84183c0dd46939cff854cbd8391cd7bbb"
+    }
+  ]
+}

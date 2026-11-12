@@ -1,0 +1,68 @@
+name: taikang-mini
+services:
+  mysql:
+    image: docker.m.daocloud.io/library/mysql:8.4.7
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-taikang_mini}
+      MYSQL_USER: ${MYSQL_USER:-taikang_mini}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Generate the private .env first}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Generate the private .env first}
+      TZ: UTC
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_0900_ai_ci"]
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+    restart: unless-stopped
+  api:
+    build: ../backend
+    env_file: ../.env
+    environment:
+      SPRING_PROFILES_ACTIVE: live
+      DB_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-taikang_mini}?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+      DB_USERNAME: ${MYSQL_USER:-taikang_mini}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+      TK_GATEWAY_URL: http://taikang-gateway:18081
+      UPLOAD_DIR: /app/data/private-files
+      TZ: UTC
+    ports:
+      - "127.0.0.1:18080:18080"
+    volumes:
+      - private-files:/app/data/private-files
+    depends_on:
+      mysql:
+        condition: service_healthy
+      taikang-gateway:
+        condition: service_started
+    restart: unless-stopped
+  taikang-gateway:
+    build: ../services/taikang-gateway
+    env_file: ../.env
+    environment:
+      TK_LEDGER_PATH: /app/var/requests.sqlite3
+      TZ: UTC
+    volumes:
+      - gateway-ledger:/app/var
+    # Internal service only. No host port and never multiple replicas.
+    restart: unless-stopped
+  web:
+    build:
+      context: ..
+      dockerfile: deploy/web.Dockerfile
+      args:
+        VITE_SERVICE_URL: ${VITE_SERVICE_URL:-http://localhost:8089}
+        VITE_ADMIN_URL: ${VITE_ADMIN_URL:-http://localhost:8088}
+    ports:
+      - "${WEB_BIND_IP:-127.0.0.1}:${ADMIN_WEB_PORT:-8088}:80"
+      - "${WEB_BIND_IP:-127.0.0.1}:${SERVICE_WEB_PORT:-8089}:81"
+    depends_on:
+      - api
+    restart: unless-stopped
+volumes:
+  mysql-data:
+  private-files:
+  gateway-ledger:
+

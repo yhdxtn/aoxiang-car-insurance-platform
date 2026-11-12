@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/orders/index",
+    "pages/me/index",
+    "pages/assistant/index",
+    "pages/order-detail/index",
+    "pages/login/index",
+    "pages/info/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "泰康车险助手",
+    "navigationBarBackgroundColor": "#fff8ee",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#fff8ee",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "color": "#8b8a88",
+    "selectedColor": "#ff7526",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/home/index", "text": "首页" },
+      { "pagePath": "pages/orders/index", "text": "订单" },
+      { "pagePath": "pages/me/index", "text": "我的" }
+    ]
+  },
+  "usingComponents": {
+    "assistant-avatar": "/components/assistant-avatar/index"
+  },
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "__usePrivacyCheck__": true,
+  "sitemapLocation": "sitemap.json"
+}

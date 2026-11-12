@@ -1,0 +1,67 @@
+.login-page {
+  padding: 80rpx 40rpx 50rpx;
+}
+.login-logo {
+  width: 160rpx;
+  margin: 0 auto 24rpx;
+}
+.login-title {
+  text-align: center;
+  font-size: 43rpx;
+  font-weight: 700;
+}
+.login-subtitle {
+  text-align: center;
+  margin: 12rpx 0 46rpx;
+}
+.login-card {
+  padding: 36rpx;
+}
+.login-card .heading {
+  margin-bottom: 18rpx;
+  font-size: 32rpx;
+}
+.login-button {
+  margin-top: 34rpx;
+}
+.agreement {
+  display: flex;
+  align-items: flex-start;
+  gap: 14rpx;
+  margin-top: 26rpx;
+}
+.check {
+  width: 32rpx;
+  height: 32rpx;
+  flex-shrink: 0;
+  border: 2rpx solid #d8d6d1;
+  border-radius: 8rpx;
+  line-height: 27rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 22rpx;
+  margin-top: 5rpx;
+}
+.checked {
+  background: #ff792d;
+  border-color: #ff792d;
+}
+.demo-login {
+  margin-top: 35rpx;
+  padding-top: 24rpx;
+  border-top: 2rpx solid #f2ede6;
+}
+.demo-label {
+  color: #ab8f72;
+  font-size: 24rpx;
+  text-align: center;
+}
+.demo-login .notice {
+  margin: 18rpx 0;
+}
+.login-footer {
+  text-align: center;
+  color: #baa897;
+  font-size: 23rpx;
+  margin-top: 34rpx;
+}

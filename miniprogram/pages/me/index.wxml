@@ -1,0 +1,136 @@
+<view wx:if="{{mode === 'demo'}}" class="demo-banner">
+  演示环境 · 当前业务数据仅用于体验
+</view>
+<view class="page">
+  <view class="profile-card">
+    <view class="profile-avatar"><assistant-avatar /></view>
+    <view class="grow">
+      <view class="profile-name">
+        {{user ? user.name : '欢迎使用车险助手'}}
+      </view>
+      <view class="profile-subtitle">
+        {{user ? roleLabel : '登录后查看个人资料和订单'}}
+      </view>
+      <view wx:if="{{user.orgName}}" class="profile-org">{{user.orgName}}</view>
+    </view>
+    <button wx:if="{{!user}}" class="btn-secondary btn-small" bindtap="login">
+      登录
+    </button>
+  </view>
+  <view wx:if="{{loading}}" class="loading">正在加载个人信息…</view>
+  <view wx:if="{{error}}" class="error-box">{{error}}</view>
+  <block wx:if="{{user}}">
+    <view class="points-card" data-type="points" bindtap="openInfo">
+      <view>
+        <view class="points-label">我的积分</view>
+        <view class="points-value">{{balance}}</view>
+      </view>
+      <view class="points-link">查看明细 →</view>
+    </view>
+    <view class="menu-group">
+      <view class="menu-item" data-type="policies" bindtap="openInfo">
+        <view class="menu-symbol">▤</view>
+        <text class="grow">适用政策</text>
+        <text class="chevron">›</text>
+      </view>
+      <view class="menu-item" data-type="organizations" bindtap="openInfo">
+        <view class="menu-symbol">▥</view>
+        <text class="grow">组织架构</text>
+        <text class="chevron">›</text>
+      </view>
+      <view
+        wx:if="{{canManage}}"
+        class="menu-item"
+        data-type="finance"
+        bindtap="openInfo"
+      >
+        <view class="menu-symbol">↗</view>
+        <text class="grow">业绩与预估佣金</text>
+        <text class="chevron">›</text>
+      </view>
+      <view
+        wx:if="{{canViewCustomers}}"
+        class="menu-item"
+        data-type="customers"
+        bindtap="openInfo"
+      >
+        <view class="menu-symbol">♧</view>
+        <text class="grow">客户资料</text>
+        <text class="chevron">›</text>
+      </view>
+    </view>
+    <view class="menu-group">
+      <view
+        wx:if="{{canViewSessions}}"
+        class="menu-item"
+        data-type="sessions"
+        bindtap="openInfo"
+      >
+        <view class="menu-symbol">☷</view>
+        <text class="grow">服务会话记录</text>
+        <text class="chevron">›</text>
+      </view>
+      <view class="menu-item" data-type="guide" bindtap="openInfo">
+        <view class="menu-symbol">?</view>
+        <text class="grow">办理指南</text>
+        <text class="chevron">›</text>
+      </view>
+      <view class="menu-item" bindtap="privacy">
+        <view class="menu-symbol">✓</view>
+        <text class="grow">隐私与资料使用</text>
+        <text class="chevron">›</text>
+      </view>
+      <view
+        wx:if="{{mode === 'demo'}}"
+        class="menu-item"
+        bindtap="showPassword"
+      >
+        <view class="menu-symbol">⚙</view>
+        <text class="grow">修改账号密码</text>
+        <text class="chevron">›</text>
+      </view>
+    </view>
+    <view class="logout-link" bindtap="logout">退出登录</view>
+  </block>
+  <view class="profile-footer">让每一程出发，都多一份安心</view>
+</view>
+<view wx:if="{{showPassword}}" class="password-panel">
+  <view class="card">
+    <view class="heading">修改账号密码</view>
+    <view wx:if="{{passwordError}}" class="error-box">{{passwordError}}</view>
+    <view class="field">
+      <view class="field-label">原密码</view>
+      <input
+        class="field-input"
+        password
+        value="{{oldPassword}}"
+        data-field="oldPassword"
+        bindinput="passwordInput"
+      />
+    </view>
+    <view class="field">
+      <view class="field-label">新密码</view>
+      <input
+        class="field-input"
+        password
+        value="{{newPassword}}"
+        data-field="newPassword"
+        bindinput="passwordInput"
+        placeholder="至少12位"
+      />
+    </view>
+    <view class="toolbar">
+      <button class="btn-plain" bindtap="closePassword" disabled="{{saving}}">
+        取消
+      </button>
+      <button
+        class="btn-primary"
+        bindtap="changePassword"
+        loading="{{saving}}"
+        disabled="{{saving}}"
+      >
+        保存
+      </button>
+    </view>
+  </view>
+</view>

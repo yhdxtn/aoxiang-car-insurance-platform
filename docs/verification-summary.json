@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-12",
+  "backend": {
+    "framework": "Spring Boot 3.5.16",
+    "java": "21.0.13",
+    "build": "passed",
+    "tests": 26,
+    "failures": 0,
+    "errors": 0,
+    "database": "H2 in MySQL compatibility mode"
+  },
+  "miniProgram": {
+    "behaviorTests": 14,
+    "staticValidation": "passed",
+    "realWechatRuntime": "not-run"
+  },
+  "adminWeb": {
+    "tests": 13,
+    "build": "passed"
+  },
+  "serviceWeb": {
+    "tests": 16,
+    "build": "passed"
+  },
+  "gateway": {
+    "tests": 36,
+    "liveCarrierCalls": 0,
+    "result": "passed"
+  },
+  "mysqlSchema": {
+    "status": "passed",
+    "mysql": "MySQL Community Server 8.4.7",
+    "migrationFiles": [
+      "V1__initial_schema.sql"
+    ],
+    "ddlStatements": 28,
+    "tables": 14,
+    "scope": "MySQL initialization-mode DDL execution; no JDBC/server integration"
+  },
+  "limits": [
+    "Full MySQL JDBC integration not run: local socket startup disallowed",
+    "Chromium end-to-end not run: local socket creation disallowed",
+    "Wechat AppID login and real device selection not run",
+    "Live Taikang account quotation not run",
+    "Docker Compose runtime not run"
+  ],
+  "totalTests": 105,
+  "schemaSha256": "46a2c9df1f3dfff125fd755a5e7e616befec88840b4507c3760ba4672c6389a6"
+}

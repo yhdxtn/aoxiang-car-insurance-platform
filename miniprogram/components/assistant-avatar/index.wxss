@@ -1,0 +1,164 @@
+:host {
+  display: block;
+  flex-shrink: 0;
+}
+.avatar {
+  width: 84rpx;
+  height: 84rpx;
+  border: 2rpx solid #fff;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%, #fff, #fff0de);
+  position: relative;
+  overflow: hidden;
+}
+.head {
+  position: absolute;
+  left: 13rpx;
+  top: 23rpx;
+  width: 58rpx;
+  height: 46rpx;
+  border-radius: 24rpx 24rpx 21rpx 21rpx;
+  background: linear-gradient(120deg, #fff, #e8eef1);
+  box-shadow: 0 3rpx 8rpx #bb8b5840;
+  border: 2rpx solid #fff;
+}
+.face {
+  position: absolute;
+  left: 6rpx;
+  right: 6rpx;
+  top: 8rpx;
+  bottom: 7rpx;
+  background: #24313e;
+  border-radius: 16rpx;
+}
+.eyes {
+  display: flex;
+  justify-content: space-between;
+  padding: 10rpx 10rpx 0;
+}
+.eye {
+  width: 5rpx;
+  height: 8rpx;
+  background: #a7e9ff;
+  border-radius: 50%;
+  box-shadow: 0 0 5rpx #64d3ff;
+}
+.smile {
+  position: absolute;
+  left: 18rpx;
+  bottom: 6rpx;
+  width: 7rpx;
+  height: 4rpx;
+  border-bottom: 2rpx solid #f3feff;
+  border-radius: 50%;
+}
+.ear {
+  position: absolute;
+  top: 37rpx;
+  background: #ff8a32;
+  width: 10rpx;
+  height: 22rpx;
+  border-radius: 8rpx;
+}
+.left {
+  left: 8rpx;
+}
+.right {
+  right: 8rpx;
+}
+.antenna {
+  position: absolute;
+  left: 40rpx;
+  top: 6rpx;
+  height: 20rpx;
+  width: 3rpx;
+  background: #f78c35;
+}
+.antenna-dot {
+  position: absolute;
+  left: -4rpx;
+  top: 0;
+  width: 11rpx;
+  height: 11rpx;
+  background: #ff8a30;
+  border-radius: 50%;
+  border: 2rpx solid #ffb96e;
+}
+.body {
+  position: absolute;
+  bottom: -12rpx;
+  left: 24rpx;
+  width: 38rpx;
+  height: 26rpx;
+  background: linear-gradient(100deg, #ffb34a, #ff7420);
+  border-radius: 18rpx;
+}
+.large {
+  width: 160rpx;
+  height: 160rpx;
+  transform-origin: top left;
+}
+.large .head {
+  left: 26rpx;
+  top: 44rpx;
+  width: 108rpx;
+  height: 88rpx;
+  border-radius: 44rpx;
+}
+.large .face {
+  left: 12rpx;
+  right: 12rpx;
+  top: 16rpx;
+  bottom: 14rpx;
+  border-radius: 28rpx;
+}
+.large .eyes {
+  padding: 18rpx 18rpx 0;
+}
+.large .eye {
+  width: 10rpx;
+  height: 15rpx;
+}
+.large .smile {
+  left: 33rpx;
+  bottom: 12rpx;
+  width: 13rpx;
+  height: 7rpx;
+}
+.large .ear {
+  top: 70rpx;
+  width: 18rpx;
+  height: 40rpx;
+}
+.large .left {
+  left: 16rpx;
+}
+.large .right {
+  right: 16rpx;
+}
+.large .antenna {
+  left: 77rpx;
+  top: 12rpx;
+  height: 38rpx;
+  width: 5rpx;
+}
+.large .antenna-dot {
+  left: -6rpx;
+  width: 17rpx;
+  height: 17rpx;
+}
+.large .body {
+  left: 46rpx;
+  bottom: -22rpx;
+  width: 72rpx;
+  height: 48rpx;
+  border-radius: 30rpx;
+}
+.service .body,
+.service .ear,
+.service .antenna-dot {
+  background: #67b69a;
+}
+.service {
+  background: radial-gradient(circle at 50% 40%, #fff, #def1e8);
+}

@@ -1,0 +1,57 @@
+.detail-hero {
+  text-align: center;
+  padding: 20rpx 10rpx 45rpx;
+}
+.status-icon {
+  width: 86rpx;
+  height: 86rpx;
+  margin: 0 auto 20rpx;
+  background: #fff0dc;
+  color: #f28a3d;
+  border-radius: 50%;
+  line-height: 80rpx;
+  font-size: 52rpx;
+}
+.detail-hero .muted {
+  margin-top: 13rpx;
+}
+.detail-total {
+  padding-top: 24rpx;
+}
+.timeline-heading {
+  font-size: 30rpx;
+  margin-bottom: 24rpx;
+}
+.timeline-item {
+  position: relative;
+  display: flex;
+  gap: 20rpx;
+  padding-bottom: 30rpx;
+  font-size: 27rpx;
+}
+.timeline-item:not(:last-child):before {
+  content: "";
+  position: absolute;
+  left: 7rpx;
+  top: 16rpx;
+  bottom: 0;
+  width: 2rpx;
+  background: #f1dfca;
+}
+.timeline-dot {
+  width: 16rpx;
+  height: 16rpx;
+  background: #f5b77a;
+  border-radius: 50%;
+  margin-top: 12rpx;
+  flex-shrink: 0;
+  z-index: 1;
+}
+.timeline-time {
+  font-size: 21rpx;
+  color: #b7a694;
+  margin-top: 8rpx;
+}
+.contact-button {
+  margin-top: 28rpx;
+}

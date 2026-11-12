@@ -1,0 +1,283 @@
+<view
+  wx:if="{{mode === 'demo' && type !== 'privacy' && type !== 'guide'}}"
+  class="demo-banner"
+>
+  演示环境 · 数据仅用于功能体验
+</view>
+<view class="page">
+  <view class="heading info-title">{{title}}</view>
+  <view wx:if="{{error}}" class="error-box">
+    {{error}}
+    <view class="text-link" bindtap="retry">点击重新加载</view>
+  </view>
+  <block wx:if="{{type === 'points'}}">
+    <view class="points-overview">
+      <view class="muted small">当前可用积分</view>
+      <view class="big-number">{{balance}}</view>
+      <view class="notice">每笔积分变动均保留原因与时间</view>
+    </view>
+    <view wx:for="{{items}}" wx:key="id" class="card point-row">
+      <view class="grow">
+        <view>{{item.reason}}</view>
+        <view class="small muted">{{item.timeLabel}}</view>
+      </view>
+      <view class="point-delta {{item.positive ? 'positive' : ''}}">
+        {{item.positive ? '+' : ''}}{{item.delta}}
+      </view>
+    </view>
+    <view class="notice">积分使用范围与兑换规则以已发布的适用政策为准。</view>
+  </block>
+  <block wx:elif="{{type === 'policies'}}">
+    <view class="between policy-toolbar">
+      <text class="muted small">展示当前账号可见的政策</text>
+      <text class="text-link small" bindtap="toggleHistory">
+        {{history ? '查看生效政策' : '包含历史版本'}}
+      </text>
+    </view>
+    <view wx:for="{{items}}" wx:key="id" class="card policy-card">
+      <view class="between">
+        <view class="policy-title">{{item.title}}</view>
+        <text class="tag">v{{item.version}}</text>
+      </view>
+      <view class="policy-meta">
+        {{item.typeLabel}} · {{item.enabled ? '已启用' : '未启用'}}
+      </view>
+      <view class="policy-content">{{item.content}}</view>
+      <view class="policy-period">
+        生效：{{item.fromLabel || item.effectiveFrom}}
+        <view wx:if="{{item.effectiveTo}}">
+          截止：{{item.toLabel || item.effectiveTo}}
+        </view>
+      </view>
+    </view>
+  </block>
+  <block wx:elif="{{type === 'organizations'}}">
+    <view class="notice info-notice">按你的账号权限展示组织及下级关系。</view>
+    <view class="card">
+      <view
+        wx:for="{{items}}"
+        wx:key="id"
+        class="org-row"
+        style="padding-left:{{item.indent}}rpx"
+      >
+        <view class="org-node">◇</view>
+        <view class="grow">
+          <view>{{item.name}}</view>
+          <view class="small muted">{{item.depthLabel}}</view>
+        </view>
+        <text wx:if="{{!item.enabled}}" class="tag">已停用</text>
+      </view>
+    </view>
+  </block>
+  <block wx:elif="{{type === 'finance'}}">
+    <view class="finance-summary">
+      <view>
+        <view class="small">保费合计</view>
+        <view class="summary-money">¥{{premium}}</view>
+      </view>
+      <view>
+        <view class="small">预估佣金</view>
+        <view class="summary-money">¥{{commission}}</view>
+      </view>
+    </view>
+    <view class="notice info-notice">
+      按订单保存的政策计算预估金额，实际结算以财务核实结果为准。
+    </view>
+    <view wx:for="{{items}}" wx:key="orderNo" class="card">
+      <view class="between">
+        <view class="small">{{item.orderNo}}</view>
+        <view class="tag">{{item.statusLabel}}</view>
+      </view>
+      <view class="small muted">{{item.orgName}}</view>
+      <view class="finance-detail">
+        <view>
+          <text class="muted">保费</text>
+          <text>{{item.premiumPending ? '' : '¥'}}{{item.premiumLabel}}</text>
+        </view>
+        <view>
+          <text class="muted">政策比例</text>
+          <text>{{item.rate}}%</text>
+        </view>
+        <view>
+          <text class="muted">预估佣金</text>
+          <text class="text-link">¥{{item.commissionLabel}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+  <block wx:elif="{{type === 'customers'}}">
+    <view class="customer-toolbar">
+      <input
+        class="field-input"
+        value="{{search}}"
+        bindinput="searchInput"
+        bindconfirm="search"
+        confirm-type="search"
+        placeholder="搜索姓名或手机号"
+      />
+      <button class="btn-secondary btn-small" bindtap="search">搜索</button>
+    </view>
+    <button
+      wx:if="{{canEditCustomers}}"
+      class="btn-primary customer-add"
+      bindtap="addCustomer"
+    >
+      ＋ 新增客户
+    </button>
+    <view
+      wx:for="{{items}}"
+      wx:key="id"
+      class="card"
+      data-id="{{item.id}}"
+      bindtap="editCustomer"
+    >
+      <view class="between">
+        <view class="policy-title">{{item.name}}</view>
+        <text wx:if="{{canEditCustomers}}" class="text-link small">编辑</text>
+      </view>
+      <view class="muted">{{item.phone}}</view>
+      <view class="customer-notes" wx:if="{{item.notes}}">{{item.notes}}</view>
+    </view>
+  </block>
+  <block wx:elif="{{type === 'sessions'}}">
+    <view
+      wx:for="{{items}}"
+      wx:key="id"
+      class="card session-card"
+      data-id="{{item.id}}"
+      bindtap="openSession"
+    >
+      <view class="between">
+        <view class="policy-title">
+          {{item.vehicle.plateNo || item.typeLabel + '服务'}}
+        </view>
+        <text class="tag">{{item.statusLabel}}</text>
+      </view>
+      <view class="between small muted">
+        <text>{{item.timeLabel}}</text>
+        <text>查看会话 →</text>
+      </view>
+    </view>
+  </block>
+  <block wx:elif="{{type === 'guide'}}">
+    <view class="card article">
+      <view class="article-heading">1. 选择车辆类型</view>
+      <view>
+        首页选择家用车、货车或摩托车。自动报价仅使用泰康渠道；摩托车由人工客服办理，暂不支持的车辆也会转人工核查。
+      </view>
+      <view class="article-heading">2. 上传并核对资料</view>
+      <view>
+        点击“上传行驶证”，可从手机相册、微信聊天或拍照选择。聊天选图由你主动选择，包含你能选取的微信群图片。支持
+        JPG、PNG、WEBP，每张不超过 10MB。
+      </view>
+      <view>
+        识别完成后，请核对车牌、车架号、车主、日期和车辆用途。资料不清晰时，可手动填写或联系人工客服。
+      </view>
+      <view class="article-heading">3. 获取保障方案</view>
+      <view>
+        选择交强险、交强险与三者或全面保障方案，填写所需保额后获取报价。每次只提交当前选中的方案。报价需要核查时，请查询状态或联系客服。
+      </view>
+      <view class="article-heading">4. 提交申请，跟进办理</view>
+      <view>
+        核对资料和保费后，提交投保申请。客服继续跟进核保、付款和出单事宜，申请本身不代表已付款或已出单。订单页面可查询办理进度。
+      </view>
+      <view class="article-heading">需要帮助？</view>
+      <view>
+        报价页面右上方可转人工，底部支持文字与资料图片沟通。重新进入“我的 →
+        服务会话记录”可继续查看同一会话。
+      </view>
+    </view>
+    <button class="btn-primary" bindtap="goHome">开始办理</button>
+  </block>
+  <block wx:elif="{{type === 'privacy'}}">
+    <view class="card article">
+      <view class="article-heading">资料的使用目的</view>
+      <view>
+        你提交的行驶证、身份证、车辆信息、联系方式和聊天内容，用于识别核对车辆资料、获取车险报价、客服沟通和处理投保申请。
+      </view>
+      <view class="article-heading">图片由你主动选择</view>
+      <view>
+        从相册、相机或微信聊天中选择图片后才会上传。小程序不会自动读取微信群内容或其他未选择的图片。
+      </view>
+      <view class="article-heading">访问与保护</view>
+      <view>
+        资料需要登录后访问，并根据本人、组织及客服职责控制权限。对外提交报价资料时，仅使用当前车险服务所需信息。
+      </view>
+      <view class="article-heading">更正与咨询</view>
+      <view>
+        提交申请前可以修改车辆资料。申请提交后，如需更正资料、提出删除请求或咨询资料使用情况，可通过原报价会话联系人工客服。
+      </view>
+      <view class="article-heading">隐私保护指引</view>
+      <view>
+        具体处理者、资料保存与用户权利说明，请阅读本小程序的《用户隐私保护指引》。
+      </view>
+      <button
+        class="btn-secondary privacy-button"
+        bindtap="openPrivacyContract"
+      >
+        查看微信隐私保护指引
+      </button>
+    </view>
+  </block>
+  <view wx:if="{{loading}}" class="loading">正在加载…</view>
+  <view
+    wx:if="{{!loading && !error && !items.length && type !== 'guide' && type !== 'privacy' && type !== 'organizations'}}"
+    class="empty"
+  >
+    <view class="empty-title">暂无相关记录</view>
+    <view class="small">有新记录后会显示在这里</view>
+  </view>
+  <view wx:if="{{hasMore && !loading}}" class="notice center">
+    上滑继续加载
+  </view>
+</view>
+<view wx:if="{{showCustomerForm}}" class="form-mask">
+  <view class="card customer-form">
+    <view class="heading">{{customer.id ? '编辑客户' : '新增客户'}}</view>
+    <view wx:if="{{customerError}}" class="error-box">{{customerError}}</view>
+    <view class="field">
+      <view class="field-label">客户姓名</view>
+      <input
+        class="field-input"
+        value="{{customer.name}}"
+        data-field="name"
+        bindinput="customerInput"
+        maxlength="60"
+      />
+    </view>
+    <view class="field">
+      <view class="field-label">手机号码</view>
+      <input
+        class="field-input"
+        value="{{customer.phone}}"
+        type="number"
+        data-field="phone"
+        bindinput="customerInput"
+        maxlength="11"
+      />
+    </view>
+    <view class="field">
+      <view class="field-label">跟进备注</view>
+      <textarea
+        class="field-input textarea"
+        value="{{customer.notes}}"
+        data-field="notes"
+        bindinput="customerInput"
+        maxlength="1000"
+      />
+    </view>
+    <view class="toolbar">
+      <button class="btn-plain" bindtap="closeCustomer" disabled="{{saving}}">
+        取消
+      </button>
+      <button
+        class="btn-primary"
+        bindtap="saveCustomer"
+        loading="{{saving}}"
+        disabled="{{saving}}"
+      >
+        保存
+      </button>
+    </view>
+  </view>
+</view>
