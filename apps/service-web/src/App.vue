@@ -51,7 +51,8 @@ const auth = ref(session()),
   docType = ref('DRIVING_LICENSE'),
   uploading = ref(false),
   fileInput = ref(null),
-  chatScroll = ref(null);
+  chatScroll = ref(null),
+  dragActive = ref(false);
 let toastTimer,
   selectedController,
   selectionVersion = 0,
@@ -340,11 +341,15 @@ async function send() {
     sending.value = false;
   }
 }
-async function upload(event) {
-  const file = event.target.files?.[0];
-  event.target.value = '';
+async function uploadFile(file) {
   if (!file || !editable.value) return;
-  if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+  const extension = (file.name?.match(/\.([^.]+)$/)?.[1] || '').toLowerCase();
+  const mime =
+    file.type ||
+    ({ jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp' }[
+      extension
+    ] || '');
+  if (!['image/jpeg', 'image/png', 'image/webp'].includes(mime)) {
     notify('仅支持 JPEG、PNG、WEBP 图片。', 'error');
     return;
   }
@@ -373,6 +378,26 @@ async function upload(event) {
   } finally {
     uploading.value = false;
   }
+}
+function upload(event) {
+  const file = event.target.files?.[0];
+  event.target.value = '';
+  void uploadFile(file);
+}
+function dragOver(event) {
+  if (!editable.value || uploading.value || !event.dataTransfer?.types?.includes('Files')) return;
+  event.preventDefault();
+  dragActive.value = true;
+}
+function dragLeave(event) {
+  if (!event.currentTarget.contains(event.relatedTarget)) dragActive.value = false;
+}
+function dropFile(event) {
+  event.preventDefault();
+  dragActive.value = false;
+  if (!editable.value || uploading.value) return;
+  const file = event.dataTransfer?.files?.[0];
+  if (file) void uploadFile(file);
 }
 function editVehicle() {
   const s = selected.value;
@@ -440,6 +465,8 @@ async function recognize(fileId) {
 function openQuote() {
   quoteForm.value = {
     plan: 'STANDARD',
+    totalPremium: isTruck.value ? '' : undefined,
+    manualNote: '',
     thirdPartyAmount: '2000000',
     driverAmount: '10000',
     passengerAmount: '10000',
@@ -466,7 +493,10 @@ async function quote() {
     JSON.stringify({ key: body.idempotencyKey, body: quoteForm.value }),
   );
   try {
-    const result = await post(`/sessions/${sid}/quotes`, body, { timeout: 180000 });
+    const endpoint = isTruck.value
+      ? `/sessions/${sid}/manual-quote`
+      : `/sessions/${sid}/quotes`;
+    const result = await post(endpoint, body, { timeout: 180000 });
     if (!['OUTCOME_UNKNOWN', 'PROCESSING'].includes(result.status))
       sessionStorage.removeItem('tk-quote-' + sid);
     quoteForm.value = null;
@@ -742,7 +772,13 @@ onUnmounted(() => {
           </div>
         </section>
         <template v-else
-          ><section class="chat-panel">
+          ><section
+            class="chat-panel"
+            :class="{ 'drag-active': dragActive }"
+            @dragover="dragOver"
+            @dragleave="dragLeave"
+            @drop="dropFile"
+          >
             <header class="chat-header">
               <div class="chat-customer">
                 <span class="avatar">{{ selected.ownerName?.slice(0, 1) || '客' }}</span>
@@ -799,6 +835,9 @@ onUnmounted(() => {
               {{ connectionError }}<button @click="refreshSelected()">刷新会话</button>
             </div>
             <div class="chat-messages" ref="chatScroll">
+              <div v-if="dragActive" class="drop-hint">
+                <Icon name="upload" :size="22" />松开鼠标上传图片
+              </div>
               <div class="conversation-start">会话开始于 {{ date(selected.createdAt) }}</div>
               <template v-for="m in messages" :key="m.id"
                 ><div v-if="m.role === 'SYSTEM'" class="system-message">{{ m.content }}</div>
@@ -1103,7 +1142,7 @@ onUnmounted(() => {
   <Modal v-if="quoteForm" title="配置泰康报价方案" @close="quoteForm = null"
     ><form @submit.prevent="quote">
       <div v-if="isTruck" class="notice amber">
-        货车承保协议未支持时会返回人工处理，请勿按家庭自用车辆填写。
+        货车由客服人工核价，填写核定保费后会回传给客户确认。
       </div>
       <div class="form-grid">
         <label class="full"
@@ -1112,7 +1151,24 @@ onUnmounted(() => {
             <option value="STANDARD">交强 + 三者</option>
             <option value="FULL">全险（含车损）</option>
           </select></label
-        ><template v-if="quoteForm.plan !== 'COMPULSORY'"
+        ><label v-if="isTruck" class="full"
+          >人工核定总保费（元）<input
+            v-model="quoteForm.totalPremium"
+            type="number"
+            min="0.01"
+            max="10000000"
+            step="0.01"
+            required
+            placeholder="请输入客服核实后的总保费"
+        /></label
+        ><label v-if="isTruck" class="full"
+          >人工报价说明（可选）<textarea
+            v-model="quoteForm.manualNote"
+            maxlength="500"
+            rows="3"
+            placeholder="例如：按车型、吨位及地区规则核定"
+        /></label
+        ><template v-if="quoteForm.plan !== 'COMPULSORY' && !isTruck"
           ><label
             >第三者责任保额（元）<input
               v-model="quoteForm.thirdPartyAmount"
@@ -1150,7 +1206,7 @@ onUnmounted(() => {
         <button type="button" class="button" @click="quoteForm = null" :disabled="working">
           取消</button
         ><button class="button primary" :disabled="working">
-          {{ working ? '报价处理中，请勿重复提交…' : '确认请求报价' }}
+          {{ working ? '报价处理中，请勿重复提交…' : isTruck ? '保存人工报价' : '确认请求报价' }}
         </button>
       </div>
     </form></Modal

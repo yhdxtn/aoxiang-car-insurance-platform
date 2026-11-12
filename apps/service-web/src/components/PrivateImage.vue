@@ -27,6 +27,16 @@ async function load() {
     if (controller === local) loading.value = false;
   }
 }
+function dragImage(event) {
+  if (!url.value || !event.dataTransfer) return;
+  const name = props.fileName || '资料图片';
+  const ext = (name.match(/\.([^.]+)$/)?.[1] || 'png').toLowerCase();
+  const mime = ext === 'jpg' || ext === 'jpeg' ? 'image/jpeg' : ext === 'webp' ? 'image/webp' : 'image/png';
+  event.dataTransfer.effectAllowed = 'copy';
+  event.dataTransfer.setData('DownloadURL', `${mime}:${name}:${url.value}`);
+  event.dataTransfer.setData('text/uri-list', url.value);
+  event.dataTransfer.setData('text/plain', name);
+}
 watch(() => props.fileId, load, { immediate: true });
 onUnmounted(() => {
   controller?.abort();
@@ -36,7 +46,13 @@ onUnmounted(() => {
 <template>
   <div class="private-file">
     <button v-if="url" class="image-preview" @click="emit('preview', url, fileName)">
-      <img :src="url" :alt="fileName || '用户上传的资料图片'" loading="lazy" />
+      <img
+        :src="url"
+        :alt="fileName || '用户上传的资料图片'"
+        loading="lazy"
+        draggable="true"
+        @dragstart="dragImage"
+      />
     </button>
     <div v-else class="image-loading">
       <Icon name="image" :size="24" /><span>{{ loading ? '正在读取授权图片' : error }}</span

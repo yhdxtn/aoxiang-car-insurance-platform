@@ -52,11 +52,11 @@
     <view wx:if="{{canSend}}" class="intro-actions">
       <button
         class="btn-secondary upload-button"
-        bindtap="chooseUpload"
+        bindtap="addAttachment"
         disabled="{{uploading || busy}}"
       >
         <text class="button-icon">↥</text>
-        上传行驶证
+        上传资料
       </button>
       <button
         class="btn-plain"

@@ -107,13 +107,17 @@ function selectSource() {
   } catch (_) {}
   const desktop = ['devtools', 'windows', 'mac', 'macos'].includes(platform)
   const itemList = desktop
-    ? ['从电脑选择 / 拖入图片']
+    ? ['从电脑选择 / 拖入图片', '从聊天记录选择图片']
     : ['从手机相册选择', '从微信群 / 聊天选择', '拍摄照片']
   return new Promise((resolve) =>
     wx.showActionSheet({
       itemList,
       success: (result) =>
-        resolve(desktop ? 'WEB' : ['ALBUM', 'CHAT', 'CAMERA'][result.tapIndex]),
+        resolve(
+          desktop
+            ? ['WEB', 'CHAT'][result.tapIndex]
+            : ['ALBUM', 'CHAT', 'CAMERA'][result.tapIndex],
+        ),
       fail: () => resolve(null),
     }),
   )

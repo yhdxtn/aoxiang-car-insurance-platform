@@ -363,6 +363,11 @@
   background: #f7f9fb;
   position: relative;
 }
+.chat-panel.drag-active .chat-messages {
+  background: #fff8ef;
+  outline: 2px dashed #e7a16f;
+  outline-offset: -9px;
+}
 .chat-header {
   display: flex;
   align-items: center;
@@ -472,6 +477,23 @@
   flex: 1;
   min-height: 0;
   scroll-behavior: smooth;
+  position: relative;
+}
+.drop-hint {
+  position: absolute;
+  inset: 24px 26px auto;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 52px;
+  border: 1px dashed #e7a16f;
+  border-radius: 12px;
+  background: #fffaf5e8;
+  color: #c68155;
+  font-size: 12px;
+  pointer-events: none;
 }
 .conversation-start {
   text-align: center;

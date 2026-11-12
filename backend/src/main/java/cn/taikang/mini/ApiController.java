@@ -173,6 +173,12 @@ public class ApiController {
     return quotes.quote(from(req), id, body);
   }
 
+  @PostMapping("/sessions/{id}/manual-quote")
+  Object manualQuote(
+      @PathVariable String id, @RequestBody Map<String, Object> body, HttpServletRequest req) {
+    return quotes.manualQuote(from(req), id, body);
+  }
+
   @PostMapping("/sessions/{id}/orders")
   Object order(
       @PathVariable String id, @RequestBody Map<String, Object> body, HttpServletRequest req) {

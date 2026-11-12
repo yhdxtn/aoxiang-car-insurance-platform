@@ -36,6 +36,89 @@ public class Quotes {
         });
   }
 
+  public Map<String, Object> manualQuote(Actor actor, String sid, Map<String, Object> input) {
+    actor.require("SERVICE", "ADMIN");
+    String key = required(input, "idempotencyKey", 100), plan = required(input, "plan", 20);
+    if (!Set.of("COMPULSORY", "STANDARD", "FULL").contains(plan))
+      throw ApiException.bad("不支持的报价方案");
+    BigDecimal total = decimal(input.get("totalPremium"), "人工核定总保费");
+    if (total.signum() <= 0
+        || total.compareTo(new BigDecimal("10000000")) > 0
+        || total.stripTrailingZeros().scale() > 2)
+      throw ApiException.bad("人工核定总保费必须大于0、不超过1000万元且最多2位小数");
+    String note = limited(input, "manualNote", 500);
+    String requestHash =
+        Crypto.hash(
+            db.json.write(
+                new TreeMap<>(map("plan", plan, "totalPremium", money(total), "manualNote", note))));
+    return tx.execute(
+        status -> {
+          Map<String, Object> s = sessions.raw(actor, sid, true, true);
+          sessions.editable(s);
+          Map<String, Object> existing =
+              db.maybe("SELECT * FROM quotes WHERE session_id=? AND idempotency_key=?", sid, key);
+          if (existing != null) {
+            if (!requestHash.equals(str(existing, "request_hash")))
+              throw ApiException.conflict("同一幂等键不能用于不同人工报价");
+            return sessions.quoteView(existing);
+          }
+          if (db.maybe(
+                  "SELECT id FROM quotes WHERE session_id=? AND status IN"
+                      + " ('PROCESSING','OUTCOME_UNKNOWN')",
+                  sid)
+              != null) throw ApiException.conflict("会话存在处理中或待核实的报价，请先核对外部报价结果");
+          int revision =
+              db.rows(
+                      "SELECT revision FROM quotes WHERE session_id=? ORDER BY revision DESC LIMIT 1",
+                      sid)
+                  .stream()
+                  .findFirst()
+                  .map(row -> ((Number) row.get("revision")).intValue() + 1)
+                  .orElse(1);
+          String qid = id(), premium = money(total);
+          Map<String, Object> result =
+              map(
+                  "status",
+                  "QUOTED",
+                  "totalPremium",
+                  premium,
+                  "commercialPremium",
+                  premium,
+                  "compulsoryPremium",
+                  "0.00",
+                  "vehicleTax",
+                  "0.00",
+                  "coverages",
+                  List.of(map("name", "人工核定车险方案", "amount", "按客服核定", "premium", premium)),
+                  "validUntil",
+                  Instant.now().plus(Duration.ofMinutes(30)).toString(),
+                  "message",
+                  note.isBlank() ? "客服已完成人工核价，请客户核对后继续。" : note);
+          db.update("UPDATE quotes SET status='SUPERSEDED' WHERE session_id=? AND status='QUOTED'", sid);
+          db.update(
+              "INSERT INTO"
+                  + " quotes(id,session_id,revision,vehicle_revision,idempotency_key,request_hash,status,plan,snapshot_data,result_data,deadline_at,valid_until,demo,created_at)"
+                  + " VALUES(?,?,?,?,?,?, 'QUOTED',?,?,?,?,?,?,?)",
+              qid,
+              sid,
+              revision,
+              s.get("vehicle_revision"),
+              key,
+              requestHash,
+              plan,
+              db.encode(map("vehicle", db.decode(s.get("vehicle_data")), "manual", true)),
+              db.encode(result),
+              timestamp(Instant.now().plusSeconds(300)),
+              timestamp(Instant.now().plus(Duration.ofMinutes(30))),
+              config.demo(),
+              now());
+          db.update("UPDATE quote_sessions SET stage=3,updated_at=? WHERE id=?", now(), sid);
+          sessions.message(sid, "SYSTEM", "ASSISTANT", "客服已完成人工报价，请核对方案与保费后继续。", null, id());
+          db.audit(actor, "MANUAL_QUOTE_CREATED", qid, "客服录入人工报价；版本 " + revision);
+          return sessions.quoteView(db.one("SELECT * FROM quotes WHERE id=?", qid));
+        });
+  }
+
   private void expire(String sid) {
     List<Map<String, Object>> pending =
         db.rows(

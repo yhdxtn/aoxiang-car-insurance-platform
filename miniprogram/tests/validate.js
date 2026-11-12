@@ -75,6 +75,10 @@ for (const page of app.pages) {
 }
 for (const item of app.tabBar.list)
   assert(app.pages.includes(item.pagePath), 'Unregistered tab page')
+for (const item of app.tabBar.list) {
+  for (const key of ['iconPath', 'selectedIconPath'])
+    if (!fs.existsSync(path.join(root, item[key]))) errors.push('Missing tab icon ' + item[key])
+}
 for (const [name, component] of Object.entries(app.usingComponents)) {
   for (const ext of ['js', 'json', 'wxml', 'wxss'])
     if (!fs.existsSync(path.join(root, component + '.' + ext)))

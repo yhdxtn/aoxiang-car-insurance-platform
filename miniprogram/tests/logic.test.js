@@ -81,7 +81,10 @@ test('开发者工具电脑导入使用本地文件选择器并标记WEB来源',
     })
   }
   wx.showActionSheet = (options) => {
-    assert.deepEqual(options.itemList, ['从电脑选择 / 拖入图片'])
+    assert.deepEqual(options.itemList, [
+      '从电脑选择 / 拖入图片',
+      '从聊天记录选择图片',
+    ])
     options.success({ tapIndex: 0 })
   }
   const selected = await media.selectSource()
@@ -90,6 +93,19 @@ test('开发者工具电脑导入使用本地文件选择器并标记WEB来源',
   assert.equal(received.type, 'image')
   assert.equal(received.count, 4)
   assert.equal(files[0].path, '/tmp/vehicle.png')
+})
+test('开发者工具电脑可从聊天记录选择图片并标记CHAT来源', async () => {
+  resetWx()
+  wx.requirePrivacyAuthorize = (options) => options.success()
+  wx.getSystemInfoSync = () => ({ platform: 'devtools' })
+  wx.showActionSheet = (options) => {
+    assert.deepEqual(options.itemList, [
+      '从电脑选择 / 拖入图片',
+      '从聊天记录选择图片',
+    ])
+    options.success({ tapIndex: 1 })
+  }
+  assert.equal(await media.selectSource(), 'CHAT')
 })
 test('拒绝隐私授权后不打开相册', async () => {
   resetWx()

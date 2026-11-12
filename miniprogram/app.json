@@ -22,9 +22,24 @@
     "backgroundColor": "#ffffff",
     "borderStyle": "white",
     "list": [
-      { "pagePath": "pages/home/index", "text": "首页" },
-      { "pagePath": "pages/orders/index", "text": "订单" },
-      { "pagePath": "pages/me/index", "text": "我的" }
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页",
+        "iconPath": "assets/tab/home.png",
+        "selectedIconPath": "assets/tab/home-active.png"
+      },
+      {
+        "pagePath": "pages/orders/index",
+        "text": "订单",
+        "iconPath": "assets/tab/orders.png",
+        "selectedIconPath": "assets/tab/orders-active.png"
+      },
+      {
+        "pagePath": "pages/me/index",
+        "text": "我的",
+        "iconPath": "assets/tab/me.png",
+        "selectedIconPath": "assets/tab/me-active.png"
+      }
     ]
   },
   "usingComponents": {
