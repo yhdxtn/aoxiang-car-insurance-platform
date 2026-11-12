@@ -6,8 +6,8 @@
 
 1. 先按总工程说明启动 Java 后端。
 2. 微信开发者工具 → 导入项目 → 选择本目录。将 `project.config.json` 中 `appid` 改为你的真实小程序 AppID。`touristappid` 仅供工具查看页面结构，不能完成真实微信登录。
-3. 修改 `config.js` 的 `apiBaseUrl`，默认 `http://127.0.0.1:18080/api/v1`。
-4. 本地联调可在开发者工具的本地设置临时关闭合法域名校验；正式发布必须恢复并配置 HTTPS request、uploadFile、downloadFile 合法域名。真机联调的 `127.0.0.1` 指手机自身，须改为可达的电脑局域网地址或测试 HTTPS 域名。
+3. 当前开发配置已将 `config.js` 的 `apiBaseUrl` 指向 `http://192.168.1.76:8088/api/v1`。如果后端地址变化，请同步修改该值。
+4. `project.private.config.json` 已为本机开发者工具启用局域网调试并关闭合法域名校验；该文件已被 Git 忽略，不会带入发布配置。正式发布必须在开发者工具中恢复合法域名校验，并配置 HTTPS request、uploadFile、downloadFile 合法域名。真机联调时，手机必须能访问 `192.168.1.76`，否则改为手机可达的测试 HTTPS 域名。
 5. `GET /public/config` 决定当前为 demo 或 live，前端不自行切换真实模式。demo 登录页显示“演示账号登录”，可用 `customer / DemoCustomer!2026`。真实环境由 `wx.login` 获得 code，Java 服务端完成 `code2session`；小程序中不保存 AppSecret、泰康密码或保险接口凭据。
 
 ## 页面
