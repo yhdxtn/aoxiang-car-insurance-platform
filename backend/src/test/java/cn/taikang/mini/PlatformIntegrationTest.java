@@ -173,6 +173,15 @@ class PlatformIntegrationTest {
   }
 
   @Test
+  void truckSessionsStartInHumanQueue() throws Exception {
+    String sid = session(customer, "TRUCK");
+    Map<String, Object> row = db.one("SELECT * FROM quote_sessions WHERE id=?", sid);
+    assertEquals("WAITING", row.get("status"));
+    Map<String, Object> first = db.one("SELECT * FROM chat_messages WHERE session_id=? AND seq=1", sid);
+    assertTrue(db.crypto.decrypt(str(first, "content_data")).contains("货车业务由人工客服处理"));
+  }
+
+  @Test
   void quotationOrderIsIdempotentAndSnapshotFrozen() throws Exception {
     String sid = session(customer, "CAR");
     Map<String, Object> q = quote(sid, customer);

@@ -47,7 +47,7 @@ public class Sessions {
     return tx.execute(
         status -> {
           String sid = id();
-          boolean manual = "MOTORCYCLE".equals(type);
+          boolean manual = Set.of("MOTORCYCLE", "TRUCK").contains(type);
           db.update(
               "INSERT INTO"
                   + " quote_sessions(id,owner_id,org_id,vehicle_type,status,stage,vehicle_data,created_at,updated_at)"
@@ -64,9 +64,11 @@ public class Sessions {
               sid,
               "SYSTEM",
               "ASSISTANT",
-              manual
-                  ? "摩托车业务由人工客服处理，已为你转接。可以先上传行驶证或填写资料。"
-                  : "你好，我是你的车险助手。先上传行驶证，我来帮你整理车辆信息，也可以手动填写。",
+              "TRUCK".equals(type)
+                  ? "货车业务由人工客服处理，已为你转接。可以先上传行驶证或填写资料。"
+                  : manual
+                      ? "摩托车业务由人工客服处理，已为你转接。可以先上传行驶证或填写资料。"
+                      : "你好，我是你的车险助手。先上传行驶证，我来帮你整理车辆信息，也可以手动填写。",
               null,
               id());
           return view(db.one("SELECT * FROM quote_sessions WHERE id=?", sid));
