@@ -253,14 +253,25 @@ const fixtures = {
     ],
   },
 };
+fixtures["assistant-upload"] = {
+  ...fixtures.assistant,
+  mode: "live",
+  showUploadMenu: true,
+  uploadOptions: [
+    { value: "DRIVING_LICENSE", label: "上传行驶证" },
+    { value: "ID_CARD", label: "上传身份证" },
+    { value: "OTHER", label: "上传其他图片" },
+  ],
+};
 for (const [name, data] of Object.entries(fixtures)) {
+  const page = name === "assistant-upload" ? "assistant" : name;
   const markup = fs.readFileSync(
-    path.join(root, "pages", name, "index.wxml"),
+    path.join(root, "pages", page, "index.wxml"),
     "utf8",
   );
   const css = (
     baseCss +
-    fs.readFileSync(path.join(root, "pages", name, "index.wxss"), "utf8")
+    fs.readFileSync(path.join(root, "pages", page, "index.wxss"), "utf8")
   )
     .replace(/(?<![\w.-])page\s*\{/g, "body{")
     .replace(/:host/g, ".assistant-avatar")

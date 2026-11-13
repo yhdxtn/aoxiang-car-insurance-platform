@@ -436,6 +436,56 @@
   height: env(safe-area-inset-bottom);
   background: #ffffffed;
 }
+.upload-menu-mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 80;
+  background: #2f2a2766;
+  display: flex;
+  align-items: flex-end;
+}
+.upload-menu-sheet {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 24rpx calc(20rpx + env(safe-area-inset-bottom));
+}
+.upload-menu-options {
+  overflow: hidden;
+  background: #fff;
+  border-radius: 28rpx;
+}
+.upload-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 108rpx;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 28rpx 24rpx;
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+  color: #252b31;
+  font-size: 32rpx;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+}
+.upload-menu-item + .upload-menu-item {
+  border-top: 1rpx solid #f0ece7;
+}
+.upload-menu-cancel {
+  margin-top: 16rpx;
+  border-radius: 28rpx;
+  color: #82868c;
+}
+.upload-menu-pressed {
+  background: #fff3e7;
+}
 .modal-mask {
   position: fixed;
   inset: 0;

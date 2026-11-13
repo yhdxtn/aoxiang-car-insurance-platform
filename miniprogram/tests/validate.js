@@ -32,7 +32,7 @@ for (const page of app.pages) {
   const source = fs.readFileSync(path.join(root, page + '.js'), 'utf8')
   const wxml = fs.readFileSync(path.join(root, page + '.wxml'), 'utf8')
   for (const match of wxml.matchAll(
-    /(?:bind|catch)(?:tap|input|change|confirm|agreeprivacyauthorization)="([\w]+)"/g,
+    /(?:bind|catch)(?:tap|input|change|confirm|touchmove|agreeprivacyauthorization)="([\w]+)"/g,
   )) {
     if (!new RegExp('\\b' + match[1] + '\\s*\\(').test(source))
       errors.push(page + ' has missing handler ' + match[1])

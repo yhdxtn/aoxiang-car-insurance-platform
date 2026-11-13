@@ -30,6 +30,60 @@ function assistantPage() {
   page._fileCache = Object.create(null)
   return page
 }
+test('上传资料菜单使用页面内面板，三个选项顺序和文案一致', () => {
+  resetWx()
+  wx.showActionSheet = () => assert.fail('资料类型菜单不应调用原生操作表')
+  const page = assistantPage()
+  page.data.session = { id: 's1' }
+  page.addAttachment()
+  assert.equal(page.data.showUploadMenu, true)
+  assert.deepEqual(page.data.uploadOptions, [
+    { value: 'DRIVING_LICENSE', label: '上传行驶证' },
+    { value: 'ID_CARD', label: '上传身份证' },
+    { value: 'OTHER', label: '上传其他图片' },
+  ])
+  page.closeUploadMenu()
+  assert.equal(page.data.showUploadMenu, false)
+})
+test('选择资料类型先关闭面板再选择来源，防止重复点击', async () => {
+  resetWx()
+  const page = assistantPage()
+  page.data.session = { id: 's1' }
+  const selected = []
+  page.uploadDocument = async (type) => {
+    assert.equal(page.data.showUploadMenu, false)
+    selected.push(type)
+  }
+  for (const option of page.data.uploadOptions) {
+    page.addAttachment()
+    const event = { currentTarget: { dataset: { type: option.value } } }
+    await page.chooseUploadDocument(event)
+    await page.chooseUploadDocument(event)
+  }
+  assert.deepEqual(selected, ['DRIVING_LICENSE', 'ID_CARD', 'OTHER'])
+})
+test('取消、无效选项和不可上传状态不会启动文件选择', async () => {
+  resetWx()
+  const page = assistantPage()
+  page.uploadDocument = async () => assert.fail('不应启动上传')
+  page.addAttachment()
+  assert.equal(page.data.showUploadMenu, false)
+  page.data.session = { id: 's1' }
+  for (const values of [{ busy: true }, { uploading: true }, { canSend: false }]) {
+    Object.assign(page.data, { busy: false, uploading: false, canSend: true }, values)
+    page.addAttachment()
+    assert.equal(page.data.showUploadMenu, false)
+  }
+  Object.assign(page.data, { busy: false, uploading: false, canSend: true })
+  page.addAttachment()
+  await page.chooseUploadDocument({ currentTarget: { dataset: { type: 'INVALID' } } })
+  assert.equal(page.data.showUploadMenu, true)
+  page.closeUploadMenu()
+  await page.chooseUploadDocument({ currentTarget: { dataset: { type: 'ID_CARD' } } })
+  page.addAttachment()
+  page.onHide()
+  assert.equal(page.data.showUploadMenu, false)
+})
 test('万元输入精确变为元，拒绝负数及异常格式', () => {
   assert.equal(fmt.yuanFromWan('200'), '2000000')
   assert.equal(fmt.yuanFromWan('0.0001'), '1')

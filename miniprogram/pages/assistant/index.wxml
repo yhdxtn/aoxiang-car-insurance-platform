@@ -412,6 +412,39 @@
   </view>
   <view class="composer-safe-bottom"></view>
 </view>
+<view
+  wx:if="{{showUploadMenu}}"
+  class="upload-menu-mask"
+  bindtap="closeUploadMenu"
+  catchtouchmove="noop"
+>
+  <view
+    class="upload-menu-sheet"
+    catchtap="noop"
+    aria-role="dialog"
+    aria-label="选择资料类型"
+  >
+    <view class="upload-menu-options">
+      <button
+        wx:for="{{uploadOptions}}"
+        wx:key="value"
+        class="upload-menu-item"
+        data-type="{{item.value}}"
+        bindtap="chooseUploadDocument"
+        hover-class="upload-menu-pressed"
+      >
+        {{item.label}}
+      </button>
+    </view>
+    <button
+      class="upload-menu-item upload-menu-cancel"
+      bindtap="closeUploadMenu"
+      hover-class="upload-menu-pressed"
+    >
+      取消
+    </button>
+  </view>
+</view>
 <view wx:if="{{showForm}}" class="modal-mask" bindtap="closeForm">
   <view class="form-sheet" catchtap="noop">
     <view class="sheet-header">

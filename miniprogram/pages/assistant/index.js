@@ -38,6 +38,12 @@ Page({
     form: {},
     formError: '',
     messageText: '',
+    showUploadMenu: false,
+    uploadOptions: [
+      { value: 'DRIVING_LICENSE', label: '上传行驶证' },
+      { value: 'ID_CARD', label: '上传身份证' },
+      { value: 'OTHER', label: '上传其他图片' },
+    ],
     uploading: false,
     uploadProgress: 0,
     quote: null,
@@ -81,6 +87,7 @@ Page({
     } else if (!this._initializing && this._options) this.initialize()
   },
   onHide() {
+    this.closeUploadMenu()
     this.stopPolling()
   },
   onUnload() {
@@ -292,15 +299,24 @@ Page({
   async chooseUpload() {
     await this.uploadDocument('DRIVING_LICENSE')
   },
-  async addAttachment() {
-    if (this.data.uploading || !this.data.canSend) return
-    wx.showActionSheet({
-      itemList: ['上传行驶证', '上传身份证', '上传其他图片'],
-      success: async (result) =>
-        this.uploadDocument(
-          ['DRIVING_LICENSE', 'ID_CARD', 'OTHER'][result.tapIndex],
-        ),
-    })
+  addAttachment() {
+    if (
+      !this.data.session ||
+      this.data.uploading ||
+      this.data.busy ||
+      !this.data.canSend
+    ) return
+    this.setData({ showUploadMenu: true })
+  },
+  closeUploadMenu() {
+    this.setData({ showUploadMenu: false })
+  },
+  async chooseUploadDocument(event) {
+    if (!this.data.showUploadMenu) return
+    const type = event.currentTarget.dataset.type
+    if (!this.data.uploadOptions.some((option) => option.value === type)) return
+    this.closeUploadMenu()
+    await this.uploadDocument(type)
   },
   async uploadDocument(documentType) {
     if (!this.data.session || this.data.uploading || !this.data.canSend) return
