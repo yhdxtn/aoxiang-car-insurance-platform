@@ -82,8 +82,8 @@ test('开发者工具电脑导入使用本地文件选择器并标记WEB来源',
   }
   wx.showActionSheet = (options) => {
     assert.deepEqual(options.itemList, [
-      '从电脑选择 / 拖入图片',
-      '从聊天记录选择图片',
+      '从本地选择 / 拖入图片',
+      '从微信聊天记录选择图片',
     ])
     options.success({ tapIndex: 0 })
   }
@@ -100,8 +100,8 @@ test('开发者工具电脑可从聊天记录选择图片并标记CHAT来源', a
   wx.getSystemInfoSync = () => ({ platform: 'devtools' })
   wx.showActionSheet = (options) => {
     assert.deepEqual(options.itemList, [
-      '从电脑选择 / 拖入图片',
-      '从聊天记录选择图片',
+      '从本地选择 / 拖入图片',
+      '从微信聊天记录选择图片',
     ])
     options.success({ tapIndex: 1 })
   }
