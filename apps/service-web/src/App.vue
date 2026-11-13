@@ -654,7 +654,7 @@ onUnmounted(() => {
     <div class="service-main">
       <header class="service-topbar">
         <div>
-          <h1>客服工作台 <span>泰康车险</span></h1>
+          <h1>客服工作台 <span>翱翔车险</span></h1>
           <p>人工接待 · 资料核验 · 业务跟进</p>
         </div>
         <div class="service-top-actions">

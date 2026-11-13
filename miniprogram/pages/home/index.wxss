@@ -1,5 +1,10 @@
 .home-page {
-  padding-top: 24rpx;
+  padding-top: 22rpx;
+}
+.home-page .section-title {
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  font-size: 31rpx;
 }
 .brand-line {
   display: flex;
@@ -86,17 +91,17 @@
   align-items: center;
   gap: 25rpx;
   color: #fff;
-  padding: 36rpx 28rpx;
+  padding: 25rpx 25rpx;
   border-radius: 28rpx;
-  min-height: 168rpx;
+  min-height: 220rpx;
   box-shadow: 0 12rpx 28rpx #ff8c3b26;
 }
 .entry-title {
-  font-size: 31rpx;
-  font-weight: 650;
+  font-size: 34rpx;
+  font-weight: 700;
 }
 .entry-subtitle {
-  font-size: 23rpx;
+  font-size: 25rpx;
   color: #a18b76;
   margin-top: 5rpx;
 }
@@ -114,18 +119,25 @@
 }
 .vehicle-logo {
   width: 100%;
-  height: 122rpx;
+  height: 100%;
   display: block;
   flex-shrink: 0;
 }
 .vehicle-logo-large {
-  width: 190rpx;
-  height: 142rpx;
-  margin-left: -14rpx;
-  margin-right: -4rpx;
+  width: 100%;
+  height: 100%;
+  margin: 0;
 }
-.small-entry .vehicle-logo {
-  margin: -8rpx 0 8rpx;
+.vehicle-spot {
+  width: 220rpx;
+  height: 180rpx;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.vehicle-spot-car {
+  width: 210rpx;
+  height: 185rpx;
 }
 .vehicle-icon {
   position: relative;
@@ -175,9 +187,22 @@
 .small-entry {
   background: #fff;
   border-radius: 25rpx;
-  padding: 26rpx;
+  padding: 22rpx 20rpx 25rpx;
+  min-height: 315rpx;
   position: relative;
   border: 2rpx solid #fff0de;
+}
+.small-entry .vehicle-spot {
+  width: 100%;
+  height: 182rpx;
+  margin-bottom: 14rpx;
+}
+.small-entry .entry-title {
+  font-size: 34rpx;
+}
+.small-entry .entry-subtitle {
+  font-size: 23rpx;
+  line-height: 1.55;
 }
 .entry-mini-icon {
   font-size: 38rpx;

@@ -2,54 +2,32 @@
   演示环境 · 报价与订单均为演示数据
 </view>
 <view class="page home-page">
-  <view class="brand-line">
-    <view class="brand-mark">保</view>
-    <text>翱翔车险报价</text>
-  </view>
-  <view class="hero">
-    <view class="hero-copy">
-      <view class="eyebrow">YOUR INSURANCE ASSISTANT</view>
-      <view class="hero-title">
-        <view>车险报价，</view>
-        <view>交给小助手。</view>
-      </view>
-      <view class="hero-description">
-        <view>上传资料 · 核对信息 · 获取方案</view>
-        <view>每一步，都有人陪你。</view>
-      </view>
-      <view class="hero-hint" bindtap="openGuide">
-        查看办理指南
-        <text>↗</text>
-      </view>
-    </view>
-    <view class="hero-avatar"><assistant-avatar size="large" /></view>
-    <view class="hero-orbit"></view>
-  </view>
-  <view class="section-title">你想为哪种车投保？</view>
   <view class="car-entry" data-type="CAR" bindtap="start">
-    <image class="vehicle-logo vehicle-logo-large" src="/assets/vehicle/car.png" mode="aspectFit" />
+    <view class="vehicle-spot vehicle-spot-car">
+      <image class="vehicle-logo vehicle-logo-large" src="/assets/vehicle/car.png" mode="aspectFit" />
+    </view>
     <view class="grow">
       <view class="entry-title">家用车</view>
-      <view class="entry-subtitle">资料识别，轻松获取泰康方案</view>
+      <view class="entry-subtitle">资料识别，轻松获取报价方案</view>
     </view>
     <view class="entry-arrow">→</view>
   </view>
   <view class="entry-grid">
     <view class="small-entry" data-type="TRUCK" bindtap="start">
-      <image class="vehicle-logo" src="/assets/vehicle/truck.png" mode="aspectFit" />
+      <view class="vehicle-spot"><image class="vehicle-logo" src="/assets/vehicle/truck.png" mode="aspectFit" /></view>
       <view class="entry-title">货车</view>
       <view class="entry-subtitle">按车辆资料核验可报范围</view>
       <view class="entry-corner">↗</view>
     </view>
     <view class="small-entry" data-type="MOTORCYCLE" bindtap="start">
-      <image class="vehicle-logo" src="/assets/vehicle/motorcycle.png" mode="aspectFit" />
+      <view class="vehicle-spot"><image class="vehicle-logo" src="/assets/vehicle/motorcycle.png" mode="aspectFit" /></view>
       <view class="entry-title">摩托车</view>
       <view class="entry-subtitle">专属人工客服协助办理</view>
       <view class="entry-corner">↗</view>
     </view>
   </view>
   <view class="service-promise">
-    <text>✓ 仅泰康渠道</text>
+    <text>✓ 专业车险服务</text>
     <text>✓ 资料授权保护</text>
     <text>✓ 人工服务</text>
   </view>

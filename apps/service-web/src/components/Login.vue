@@ -38,7 +38,7 @@ async function login() {
     <div class="service-login-art">
       <div class="brand">
         <div class="brand-icon"><Icon name="headset" :size="28" /></div>
-        <div><strong>泰康车险</strong><small>人工客服工作台</small></div>
+        <div><strong>翱翔车险</strong><small>人工客服工作台</small></div>
       </div>
       <div class="service-story">
         <span class="eyebrow">PERSONAL SERVICE</span>

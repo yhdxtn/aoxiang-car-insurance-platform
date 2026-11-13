@@ -267,7 +267,7 @@ for (const [name, data] of Object.entries(fixtures)) {
     .replace(/([\d.]+)rpx/g, (_, n) => Number(n) * 0.52 + "px");
   const title =
     name === "assistant"
-      ? "AI 投保助手"
+      ? "翱翔车险报价"
       : name === "orders"
         ? "我的订单"
         : "翱翔车险报价";

@@ -93,7 +93,7 @@ const serviceUrl = import.meta.env.VITE_SERVICE_URL || 'http://localhost:5174';
 <template>
   <div v-if="checking" class="boot-screen">
     <div class="spinner"></div>
-    <p>正在连接车险工作台</p>
+    <p>正在连接翱翔车险工作台</p>
   </div>
   <Login v-else-if="!auth" :config="config" @login="loggedIn" />
   <div v-else-if="!items.length" class="boot-screen">
@@ -107,7 +107,7 @@ const serviceUrl = import.meta.env.VITE_SERVICE_URL || 'http://localhost:5174';
     <aside class="sidebar" :class="{ open: mobileMenu }">
       <div class="brand">
         <div class="brand-icon"><Icon name="shield" :size="26" /></div>
-        <div><strong>泰康车险</strong><small>业务管理工作台</small></div>
+        <div><strong>翱翔车险</strong><small>业务管理工作台</small></div>
       </div>
       <div class="workspace-label">WORKSPACE <span>运营管理</span></div>
       <nav>
@@ -124,7 +124,7 @@ const serviceUrl = import.meta.env.VITE_SERVICE_URL || 'http://localhost:5174';
       <div class="sidebar-bottom">
         <div class="channel-card">
           <span class="channel-dot"></span>
-          <div><b>专属泰康报价通道</b><small>小程序业务独立运行</small></div>
+          <div><b>专属车险报价通道</b><small>小程序业务独立运行</small></div>
         </div>
         <button class="logout-button" @click="logout">
           <Icon name="logout" :size="17" />安全退出
@@ -176,7 +176,7 @@ const serviceUrl = import.meta.env.VITE_SERVICE_URL || 'http://localhost:5174';
         />
       </div>
       <footer class="app-footer">
-        <span>泰康车险报价管理系统</span><span>仅限授权业务人员使用 · 数据按组织权限展示</span>
+        <span>翱翔车险报价管理系统</span><span>仅限授权业务人员使用 · 数据按组织权限展示</span>
       </footer>
     </main>
   </div>

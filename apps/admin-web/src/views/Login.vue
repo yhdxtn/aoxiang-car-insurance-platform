@@ -30,7 +30,7 @@ async function login() {
     <section class="login-story">
       <div class="brand light">
         <div class="brand-icon"><Icon name="shield" :size="28" /></div>
-        <div><strong>泰康车险</strong><small>INSURANCE WORKSPACE</small></div>
+        <div><strong>翱翔车险</strong><small>INSURANCE WORKSPACE</small></div>
       </div>
       <div class="story-main">
         <span class="eyebrow light">一站式车险业务工作台</span>
