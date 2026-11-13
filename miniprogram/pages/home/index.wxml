@@ -4,8 +4,7 @@
 <view class="page home-page">
   <view class="brand-line">
     <view class="brand-mark">保</view>
-    <text>泰康车险服务</text>
-    <text class="brand-label">便捷 · 安心</text>
+    <text>翱翔车险报价</text>
   </view>
   <view class="hero">
     <view class="hero-copy">
@@ -28,12 +27,7 @@
   </view>
   <view class="section-title">你想为哪种车投保？</view>
   <view class="car-entry" data-type="CAR" bindtap="start">
-    <view class="vehicle-icon car-icon">
-      <view class="car-roof"></view>
-      <view class="car-body"></view>
-      <view class="wheel one"></view>
-      <view class="wheel two"></view>
-    </view>
+    <image class="vehicle-logo vehicle-logo-large" src="/assets/vehicle/car.png" mode="aspectFit" />
     <view class="grow">
       <view class="entry-title">家用车</view>
       <view class="entry-subtitle">资料识别，轻松获取泰康方案</view>
@@ -42,13 +36,13 @@
   </view>
   <view class="entry-grid">
     <view class="small-entry" data-type="TRUCK" bindtap="start">
-      <view class="entry-mini-icon">▣</view>
+      <image class="vehicle-logo" src="/assets/vehicle/truck.png" mode="aspectFit" />
       <view class="entry-title">货车</view>
       <view class="entry-subtitle">按车辆资料核验可报范围</view>
       <view class="entry-corner">↗</view>
     </view>
     <view class="small-entry" data-type="MOTORCYCLE" bindtap="start">
-      <view class="entry-mini-icon teal">◉</view>
+      <image class="vehicle-logo" src="/assets/vehicle/motorcycle.png" mode="aspectFit" />
       <view class="entry-title">摩托车</view>
       <view class="entry-subtitle">专属人工客服协助办理</view>
       <view class="entry-corner">↗</view>

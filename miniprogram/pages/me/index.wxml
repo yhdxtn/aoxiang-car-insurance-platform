@@ -6,11 +6,9 @@
     <view class="profile-avatar"><assistant-avatar /></view>
     <view class="grow">
       <view class="profile-name">
-        {{user ? user.name : '欢迎使用车险助手'}}
+        {{user ? user.name : '欢迎使用翱翔车险报价'}}
       </view>
-      <view class="profile-subtitle">
-        {{user ? roleLabel : '登录后查看个人资料和订单'}}
-      </view>
+      <view wx:if="{{user}}" class="profile-subtitle">{{roleLabel}}</view>
       <view wx:if="{{user.orgName}}" class="profile-org">{{user.orgName}}</view>
     </view>
     <button wx:if="{{!user}}" class="btn-secondary btn-small" bindtap="login">

@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { get, post, patch, query } from '../api.js';
-import { roles, roleName, date } from '../domain.js';
+import { roles, userRoleName } from '../domain.js';
 import Icon from '../components/Icon.vue';
 import EmptyState from '../components/EmptyState.vue';
 import Modal from '../components/Modal.vue';
@@ -9,6 +9,7 @@ import Pagination from '../components/Pagination.vue';
 const props = defineProps({ page: String, user: Object, notify: Function });
 const orgs = ref([]),
   data = ref({ items: [], total: 0 }),
+  agentUsers = ref([]),
   pageNo = ref(1),
   role = ref(''),
   busy = ref(false),
@@ -19,6 +20,9 @@ const canEditUser = (u) =>
   props.user.role === 'ADMIN' || (u.role === 'AGENT' && u.orgId !== props.user.orgId);
 const isOrg = computed(() => props.page === 'organizations');
 const roleChoices = computed(() => (props.user.role === 'ADMIN' ? roles : { AGENT: '代理' }));
+const firstLevelAgents = computed(() =>
+  agentUsers.value.filter((u) => Number(u.agentLevel) === 1 && u.enabled && u.id !== form.value?.id),
+);
 const orgNames = computed(() => Object.fromEntries(orgs.value.map((o) => [o.id, o.name])));
 const orderedOrgs = computed(() => {
   const rows = [];
@@ -47,8 +51,11 @@ async function reload(p = pageNo.value) {
   try {
     const o = await get('/organizations');
     orgs.value = o.items || [];
-    if (!isOrg.value)
+    if (!isOrg.value) {
       data.value = await get('/users?' + query({ page: p, size: 20, role: role.value }));
+      const agents = await get('/users?' + query({ page: 1, size: 100, role: 'AGENT' }));
+      agentUsers.value = agents.items || [];
+    }
   } catch (e) {
     error.value = e.message;
   } finally {
@@ -62,17 +69,36 @@ function edit(item) {
       : { name: '', parentId: props.user.orgId };
   else
     form.value = item
-      ? { id: item.id, name: item.name, enabled: item.enabled, role: item.role, orgId: item.orgId }
+      ? {
+          id: item.id,
+          name: item.name,
+          enabled: item.enabled,
+          role: item.role,
+          agentLevel: Number(item.agentLevel || 0),
+          parentAgentId: item.parentAgentId || '',
+          orgId: item.orgId,
+        }
       : {
           name: '',
           username: '',
           password: '',
-          role: props.user.role === 'ADMIN' ? 'SERVICE' : 'AGENT',
+          role: props.user.role === 'ADMIN' ? 'CUSTOMER' : 'AGENT',
+          agentLevel: props.user.role === 'ADMIN' ? 0 : 1,
+          parentAgentId: '',
           orgId:
             props.user.role === 'ADMIN'
               ? props.user.orgId
               : orgs.value.find((o) => o.id !== props.user.orgId && o.enabled)?.id || '',
         };
+}
+function onRoleChange() {
+  if (form.value?.role !== 'AGENT') {
+    form.value.agentLevel = 0;
+    form.value.parentAgentId = '';
+  } else if (!form.value.agentLevel) form.value.agentLevel = 1;
+}
+function onAgentLevelChange() {
+  if (Number(form.value?.agentLevel) !== 2) form.value.parentAgentId = '';
 }
 async function save() {
   saving.value = true;
@@ -82,6 +108,8 @@ async function save() {
       if (props.user.role !== 'ADMIN' && !isOrg.value) {
         delete body.role;
         delete body.orgId;
+        delete body.agentLevel;
+        delete body.parentAgentId;
       }
       await patch(`/${isOrg.value ? 'organizations' : 'users'}/${id}`, body);
     } else await post('/' + (isOrg.value ? 'organizations' : 'users'), body);
@@ -228,7 +256,7 @@ onMounted(() => reload());
                 </div>
               </td>
               <td>
-                <span class="role-pill">{{ roleName(u.role) }}</span>
+                <span class="role-pill">{{ userRoleName(u) }}</span>
               </td>
               <td>{{ orgNames[u.orgId] || u.orgName || '—' }}</td>
               <td>
@@ -297,8 +325,22 @@ onMounted(() => reload());
                 v-model="form.role"
                 required
                 :disabled="!!form.id && user.role !== 'ADMIN'"
+                @change="onRoleChange"
               >
                 <option v-for="(label, value) in roleChoices" :value="value">{{ label }}</option>
+              </select></label
+            ><label v-if="form.role === 'AGENT' && user.role === 'ADMIN'"
+              >代理级别<select v-model.number="form.agentLevel" required @change="onAgentLevelChange">
+                <option :value="1">一级代理</option>
+                <option :value="2">二级代理</option>
+              </select></label
+            ><label
+              v-if="form.role === 'AGENT' && Number(form.agentLevel) === 2 && user.role === 'ADMIN'"
+              >所属一级代理<select v-model="form.parentAgentId" required>
+                <option value="" disabled>请选择一级代理</option>
+                <option v-for="a in firstLevelAgents" :key="a.id" :value="a.id">
+                  {{ a.name }}（{{ orgNames[a.orgId] || a.orgName || '—' }}）
+                </option>
               </select></label
             ><label
               >所属组织<select

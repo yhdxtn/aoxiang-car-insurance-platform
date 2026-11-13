@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { get, post, session, saveSession } from './api.js';
-import { menu, roleName } from './domain.js';
+import { menu, userRoleName } from './domain.js';
 import Icon from './components/Icon.vue';
 import Login from './views/Login.vue';
 import Dashboard from './views/Dashboard.vue';
@@ -154,7 +154,7 @@ const serviceUrl = import.meta.env.VITE_SERVICE_URL || 'http://localhost:5174';
           <div class="user-avatar">{{ auth.user.name?.slice(0, 1) || '管' }}</div>
           <div class="user-info">
             <b>{{ auth.user.name }}</b
-            ><span>{{ roleName(auth.user.role) }}</span>
+            ><span>{{ userRoleName(auth.user) }}</span>
           </div>
         </div>
       </header>

@@ -128,6 +128,11 @@ public class Management {
       throw ApiException.bad("用户名需为3至100位英文字母、数字或_.@-");
     if (!Set.of("ADMIN", "FINANCE", "AGENT", "SERVICE", "CUSTOMER").contains(role))
       throw ApiException.bad("无效角色");
+    if (!actor.is("ADMIN") && (input.containsKey("agentLevel") || input.containsKey("parentAgentId")))
+      throw ApiException.forbidden();
+    int agentLevel = requestedAgentLevel(input, role, role.equals("AGENT") ? 1 : 0);
+    String parentAgentId = limited(input, "parentAgentId", 36);
+    validateAgentAssignment(actor, role, agentLevel, parentAgentId, org, null);
     AuthService.validatePassword(password);
     if (!actor.is("ADMIN")
         && (!role.equals("AGENT")
@@ -152,6 +157,11 @@ public class Management {
               org,
               role.equals("AGENT") ? id().replace("-", "").substring(0, 16) : null,
               now());
+          db.update(
+              "UPDATE users SET agent_level=?,parent_agent_id=? WHERE id=?",
+              agentLevel,
+              parentAgentId.isBlank() ? null : parentAgentId,
+              uid);
           db.audit(actor, "USER_CREATED", uid, "创建角色：" + role);
           return auth.publicUser(db.one("SELECT * FROM users WHERE id=?", uid));
         });
@@ -167,17 +177,35 @@ public class Management {
                   || str(u, "org_id").equals(actor.orgId())
                   || !access.descendants(actor.orgId()).contains(str(u, "org_id"))))
             throw ApiException.forbidden();
-          if (!actor.is("ADMIN") && (input.containsKey("role") || input.containsKey("orgId")))
+          if (!actor.is("ADMIN")
+              && (input.containsKey("role")
+                  || input.containsKey("orgId")
+                  || input.containsKey("agentLevel")
+                  || input.containsKey("parentAgentId")))
             throw ApiException.forbidden();
           String name = input.containsKey("name") ? required(input, "name", 100) : str(u, "name"),
               role = input.containsKey("role") ? required(input, "role", 20) : str(u, "role"),
               org = input.containsKey("orgId") ? required(input, "orgId", 36) : str(u, "org_id");
+          int agentLevel =
+              requestedAgentLevel(
+                  input,
+                  role,
+                  str(u, "agent_level").isBlank()
+                      ? (role.equals("AGENT") ? 1 : 0)
+                      : (int) number(u.get("agent_level")));
+          String parentAgentId =
+              input.containsKey("parentAgentId")
+                  ? limited(input, "parentAgentId", 36)
+                  : str(u, "parent_agent_id");
+          if (!role.equals("AGENT")) parentAgentId = "";
+          else if (agentLevel == 1 && !input.containsKey("parentAgentId")) parentAgentId = "";
           boolean enabled =
               input.containsKey("enabled")
                   ? booleanValue(input.get("enabled"))
                   : bool(u.get("enabled"));
           if (!Set.of("ADMIN", "FINANCE", "AGENT", "SERVICE", "CUSTOMER").contains(role))
             throw ApiException.bad("无效角色");
+          validateAgentAssignment(actor, role, agentLevel, parentAgentId, org, uid);
           if (Set.of("ADMIN", "FINANCE").contains(role) && !auth.rootOrg().equals(org))
             throw ApiException.bad("总部管理员与财务必须归属总部");
           if (!auth.orgEnabled(org)) throw ApiException.bad("目标组织已停用");
@@ -189,7 +217,7 @@ public class Management {
               && db.rows("SELECT id FROM users WHERE role='ADMIN' AND enabled=TRUE").size() <= 1)
             throw ApiException.bad("至少保留一名启用的管理员");
           db.update(
-              "UPDATE users SET name=?,role=?,org_id=?,enabled=?,invite_code=? WHERE id=?",
+              "UPDATE users SET name=?,role=?,org_id=?,enabled=?,invite_code=?,agent_level=?,parent_agent_id=? WHERE id=?",
               name,
               role,
               org,
@@ -199,6 +227,8 @@ public class Management {
                       ? id().replace("-", "").substring(0, 16)
                       : u.get("invite_code"))
                   : null,
+              agentLevel,
+              parentAgentId.isBlank() ? null : parentAgentId,
               uid);
           if (!role.equals(str(u, "role"))
               || !org.equals(str(u, "org_id"))
@@ -207,6 +237,47 @@ public class Management {
           db.audit(actor, "USER_UPDATED", uid, "更新账号；历史订单组织保持冻结归属");
           return auth.publicUser(db.one("SELECT * FROM users WHERE id=?", uid));
         });
+  }
+
+  int requestedAgentLevel(Map<String, Object> input, String role, int fallback) {
+    Object raw = input.get("agentLevel");
+    int level = raw == null || String.valueOf(raw).trim().isBlank() ? fallback : parseAgentLevel(raw);
+    if (!role.equals("AGENT") && level != 0) throw ApiException.bad("只有代理账号可以设置代理级别");
+    if (role.equals("AGENT") && (level < 1 || level > 2))
+      throw ApiException.bad("代理级别只能是一级或二级");
+    return level;
+  }
+
+  int parseAgentLevel(Object raw) {
+    try {
+      int level = Integer.parseInt(String.valueOf(raw).trim());
+      if (level < 0 || level > 2) throw new NumberFormatException();
+      return level;
+    } catch (Exception e) {
+      throw ApiException.bad("代理级别必须是0、1或2");
+    }
+  }
+
+  void validateAgentAssignment(
+      Actor actor, String role, int agentLevel, String parentAgentId, String orgId, String selfId) {
+    if (!role.equals("AGENT")) {
+      if (agentLevel != 0 || !parentAgentId.isBlank())
+        throw ApiException.bad("普通用户或工作人员不能设置代理归属");
+      return;
+    }
+    if (agentLevel == 1 && !parentAgentId.isBlank())
+      throw ApiException.bad("一级代理不能设置上级代理");
+    if (agentLevel != 2) return;
+    if (parentAgentId.isBlank()) throw ApiException.bad("二级代理必须选择所属一级代理");
+    if (parentAgentId.equals(selfId)) throw ApiException.bad("代理不能隶属于自己");
+    Map<String, Object> parent =
+        db.maybe(
+            "SELECT id,org_id,enabled FROM users WHERE id=? AND role='AGENT' AND agent_level=1",
+            parentAgentId);
+    if (parent == null || !bool(parent.get("enabled")) || !auth.orgEnabled(str(parent, "org_id")))
+      throw ApiException.bad("所属一级代理不存在或已停用");
+    if (!access.descendants(str(parent, "org_id")).contains(orgId))
+      throw ApiException.bad("二级代理组织必须位于所属一级代理组织范围内");
   }
 
   boolean booleanValue(Object value) {

@@ -37,7 +37,7 @@
 ## 管理/我的
 - `GET /dashboard` -> `{orders,customers,pendingSessions,premium,completedOrders}`
 - `GET /organizations` -> `{items:[{id,name,parentId,level,enabled}]}`；`POST /organizations` `{name,parentId}`，`PATCH /organizations/{id}` `{name?,enabled?}`。总部可全局；代理仅创建自己直接子级。
-- `GET /users?role=&page=&size=` -> page；`POST /users` `{username,password,name,role,orgId}`，`PATCH /users/{id}` `{name?,enabled?,role?,orgId?}`；ADMIN 管理角色，代理仅创建授权下级 AGENT；组织变更不重写历史订单归属。
+- `GET /users?role=&page=&size=` -> page；用户返回 `agentLevel`（0普通用户/工作人员、1一级代理、2二级代理）、`parentAgentId`、`parentAgentName`；`POST /users` `{username,password,name,role,orgId,agentLevel?,parentAgentId?}`，`PATCH /users/{id}` `{name?,enabled?,role?,orgId?,agentLevel?,parentAgentId?}`。微信新用户始终为 CUSTOMER；仅 ADMIN 可设置代理级别，二级代理必须隶属于启用中的一级代理；组织变更不重写历史订单归属。
 - `GET /policies?history=false` -> `{items:[{id,title,content,orgId,parentPolicyId,version,rate,enabled,effectiveFrom,effectiveTo,vehicleType}]}`
 - `POST /policies` `{title,content,orgId,parentPolicyId?,rate,effectiveFrom,effectiveTo?,vehicleType}` -> policy。上级政策归属/有效期/车种匹配并限制子级 rate <= parent rate，政策不可原地覆盖，创建新版本。rate 为百分比，不默认写入讨论数字。
 - `GET /finance` -> `{premium,estimatedCommission,items:[{orderNo,orgName,totalPremium,rate,commission,status}]}`。仅 ADMIN/FINANCE/AGENT，按订单冻结政策统计；没有政策则0；非真实付款结算系统。

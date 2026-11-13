@@ -26,19 +26,45 @@ Page({
       this.setData({ user: null, balance: 0 })
       return
     }
+    const app = getApp()
+    const cached = app.globalData.profileCache
+    if (cached && Date.now() - cached.at < 30000) {
+      const user = cached.user
+      this.setData({
+        user,
+        balance: cached.points.balance,
+        roleLabel:
+          user.role === 'AGENT' && Number(user.agentLevel) === 2
+            ? '二级代理'
+            : user.role === 'AGENT' && Number(user.agentLevel) === 1
+              ? '一级代理'
+              : fmt.roleLabels[user.role] || user.role,
+        canManage: ['ADMIN', 'FINANCE', 'AGENT'].includes(user.role),
+        canViewCustomers: ['ADMIN', 'AGENT'].includes(user.role),
+        canViewSessions: user.role !== 'FINANCE',
+        loading: false,
+        error: '',
+      })
+      return
+    }
     this.setData({
       loading: true,
       error: '',
       mode: wx.getStorageSync('tk.mode'),
     })
     try {
-      const user = await api.get('/auth/me')
+      const [user, points] = await Promise.all([api.get('/auth/me'), api.get('/points')])
       getApp().globalData.user = user
-      const points = await api.get('/points')
+      app.globalData.profileCache = { at: Date.now(), user, points }
       this.setData({
         user,
         balance: points.balance,
-        roleLabel: fmt.roleLabels[user.role] || user.role,
+        roleLabel:
+          user.role === 'AGENT' && Number(user.agentLevel) === 2
+            ? '二级代理'
+            : user.role === 'AGENT' && Number(user.agentLevel) === 1
+              ? '一级代理'
+              : fmt.roleLabels[user.role] || user.role,
         canManage: ['ADMIN', 'FINANCE', 'AGENT'].includes(user.role),
         canViewCustomers: ['ADMIN', 'AGENT'].includes(user.role),
         canViewSessions: user.role !== 'FINANCE',

@@ -90,5 +90,7 @@ public class Bootstrap implements ApplicationRunner {
         org,
         role.equals("AGENT") ? id().replace("-", "").substring(0, 16) : null,
         now());
+    if (role.equals("AGENT"))
+      db.update("UPDATE users SET agent_level=1,parent_agent_id=NULL WHERE username=?", username);
   }
 }

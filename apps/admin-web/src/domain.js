@@ -56,6 +56,11 @@ export const date = (value) => {
   return Number.isNaN(d.getTime()) ? String(value) : d.toLocaleString('zh-CN', { hour12: false });
 };
 export const roleName = (value) => roles[value] || value || '—';
+export const userRoleName = (user) => {
+  if (!user) return '—';
+  if (user.role === 'AGENT') return Number(user.agentLevel) === 2 ? '二级代理' : '一级代理';
+  return roleName(user.role);
+};
 export const statusName = (value) => statuses[value] || value || '—';
 export function statusTone(status) {
   if (['COMPLETED', 'QUOTED', 'ONLINE', 'SUCCEEDED'].includes(status)) return 'green';

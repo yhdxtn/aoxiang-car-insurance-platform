@@ -1,6 +1,6 @@
 {
-  "description": "独立泰康车险报价小程序",
-  "projectname": "taikang-mini-program",
+  "description": "翱翔车险报价小程序",
+  "projectname": "aoxiang-car-insurance-mini-program",
   "appid": "wxe0bfe52b94757d21",
   "compileType": "miniprogram",
   "libVersion": "3.7.10",

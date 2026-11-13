@@ -1,6 +1,6 @@
 <view class="login-page">
   <view class="login-logo"><assistant-avatar size="large" /></view>
-  <view class="login-title">欢迎来到车险助手</view>
+  <view class="login-title">欢迎来到翱翔车险报价</view>
   <view class="muted login-subtitle">安心办理，从这里开始</view>
   <view class="card login-card">
     <view class="heading">微信快捷登录</view>

@@ -270,7 +270,7 @@ for (const [name, data] of Object.entries(fixtures)) {
       ? "AI 投保助手"
       : name === "orders"
         ? "我的订单"
-        : "泰康车险助手";
+        : "翱翔车险报价";
   const html =
     '<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' +
     title +

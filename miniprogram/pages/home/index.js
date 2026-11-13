@@ -9,10 +9,13 @@ Page({
   async load() {
     this.setData({ loading: true, error: '', loggedIn: !!api.token() })
     try {
-      const config = await getApp().loadConfig()
+      const configPromise = getApp().loadConfig()
+      const sessionsPromise = api.token()
+        ? api.get('/sessions?page=1&size=3')
+        : Promise.resolve({ items: [] })
+      const [config, result] = await Promise.all([configPromise, sessionsPromise])
       this.setData({ mode: config.mode })
       if (api.token()) {
-        const result = await api.get('/sessions?page=1&size=3')
         this.setData({
           sessions: (result.items || []).map((item) =>
             Object.assign({}, item, {

@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { get, post, put } from '../api.js';
-import { date, roleName } from '../domain.js';
+import { date, userRoleName } from '../domain.js';
 import Icon from '../components/Icon.vue';
 import StatusBadge from '../components/StatusBadge.vue';
 import EmptyState from '../components/EmptyState.vue';
@@ -205,7 +205,7 @@ onMounted(() => reload());
         <section class="card account-profile">
           <div class="large-avatar">{{ user.name?.slice(0, 1) }}</div>
           <h2>{{ user.name }}</h2>
-          <span class="role-pill">{{ roleName(user.role) }}</span>
+          <span class="role-pill">{{ userRoleName(user) }}</span>
           <p>{{ user.orgName || '当前组织' }}</p>
           <div class="user-id">
             <small>用户 ID</small><code>{{ user.id }}</code>

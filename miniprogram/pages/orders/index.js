@@ -35,6 +35,14 @@ Page({
   },
   async load(reset) {
     if (!api.token() || this.data.loading) return
+    const app = getApp()
+    const cached = app.globalData.orderCache
+    if (reset && cached && Date.now() - cached.at < 30000) {
+      const result = cached.result || { items: [], total: 0 }
+      const items = (result.items || []).map(fmt.order)
+      this.setData({ items, page: 1, hasMore: items.length < result.total, error: '' })
+      return
+    }
     const page = reset ? 1 : this.data.page + 1
     this.setData({ loading: true, error: '' })
     try {
@@ -50,6 +58,7 @@ Page({
       const incoming = (result.items || []).map(fmt.order)
       const items = reset ? incoming : this.data.items.concat(incoming)
       this.setData({ items, page, hasMore: items.length < result.total })
+      if (reset) app.globalData.orderCache = { at: Date.now(), result }
     } catch (error) {
       auth.handleError(this, error)
     } finally {

@@ -185,6 +185,13 @@ public class AuthService {
 
   public Map<String, Object> publicUser(Map<String, Object> user) {
     Map<String, Object> org = db.one("SELECT * FROM organizations WHERE id=?", user.get("org_id"));
+    String parentAgentId = str(user, "parent_agent_id");
+    Map<String, Object> parentAgent =
+        parentAgentId.isBlank()
+            ? null
+            : db.maybe(
+                "SELECT id,name FROM users WHERE id=? AND role='AGENT' AND agent_level=1",
+                parentAgentId);
     return map(
         "id",
         user.get("id"),
@@ -194,6 +201,12 @@ public class AuthService {
         user.get("name"),
         "role",
         user.get("role"),
+        "agentLevel",
+        number(user.get("agent_level")),
+        "parentAgentId",
+        parentAgentId.isBlank() ? null : parentAgentId,
+        "parentAgentName",
+        parentAgent == null ? null : parentAgent.get("name"),
         "orgId",
         user.get("org_id"),
         "orgName",
